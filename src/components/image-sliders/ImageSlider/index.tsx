@@ -1,9 +1,9 @@
 import { useKeenSlider } from 'keen-slider/react';
-import 'keen-slider/keen-slider.min.css';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Container } from './style';
 import Arrow from '../../SliderArrow';
+import useSlider from '../../../hooks/useSlider';
 
 export interface ImageProps {
   src: string;
@@ -12,20 +12,13 @@ export interface ImageProps {
 }
 
 const ImageSlider = ({ images }: { images: ImageProps[] }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loaded, setLoaded] = useState(false);
-
-  const [ref, instanceRef] = useKeenSlider<HTMLDivElement>({
-    loop: true,
+  const { currentSlide, instanceRef, loaded, ref } = useSlider({
     slides: {
       perView: 6,
       spacing: 0,
     },
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);
-    },
-    created() {
-      setLoaded(true);
+    slideChanged(s) {
+      console.log('images changed');
     },
   });
 

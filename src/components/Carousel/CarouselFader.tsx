@@ -2,6 +2,7 @@ import { useKeenSlider } from 'keen-slider/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ImageData } from '.';
+import useSlider from '../../hooks/useSlider';
 import {
   CarouselDot,
   CarouselDots,
@@ -17,16 +18,8 @@ interface CarouselFaderProps {
 
 const CarouselFader = ({ images, onSlideChange }: CarouselFaderProps) => {
   const [opacities, setOpacities] = useState<number[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loaded, setLoaded] = useState(false);
-
-  const [ref, instanceRef] = useKeenSlider<HTMLDivElement>({
+  const { currentSlide, instanceRef, loaded, ref } = useSlider({
     slides: images.length,
-    loop: true,
-    created() {
-      setLoaded(true);
-    },
-
     detailsChanged(s) {
       const new_opacities = s.track.details.slides.map(
         (slide) => slide.portion
@@ -34,11 +27,11 @@ const CarouselFader = ({ images, onSlideChange }: CarouselFaderProps) => {
       setOpacities(new_opacities);
     },
     slideChanged(s) {
-      setCurrentSlide(s.track.details.rel);
       onSlideChange(null);
       setTimeout(() => onSlideChange(images[s.track.details.rel]), 500);
     },
   });
+
   return (
     <>
       <StyledCarouselFader ref={ref}>

@@ -1,8 +1,8 @@
 import { useKeenSlider } from 'keen-slider/react';
 import ProductCard, { ProductProps } from '../../ProductCard';
 import { Container } from './style';
-import 'keen-slider/keen-slider.min.css';
 import SliderTitle from '../../SliderTitle';
+import useSlider from '../../../hooks/useSlider';
 
 const ProductSlider = ({
   title,
@@ -11,11 +11,13 @@ const ProductSlider = ({
   title?: string;
   products: ProductProps[];
 }) => {
-  const [ref] = useKeenSlider<HTMLDivElement>({
-    loop: true,
+  const { currentSlide, instanceRef, loaded, ref } = useSlider({
     slides: {
       perView: 4,
       spacing: 0,
+    },
+    slideChanged(s) {
+      console.log('images changed');
     },
   });
 

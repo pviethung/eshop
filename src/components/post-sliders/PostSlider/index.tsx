@@ -1,8 +1,8 @@
-import { useKeenSlider } from 'keen-slider/react';
-import 'keen-slider/keen-slider.min.css';
 import { Container, PostSliderHeader } from './style';
 import SliderTitle from '../../SliderTitle';
 import PostCard from '../../PostCard';
+import useSlider from '../../../hooks/useSlider';
+import Arrow from '../../SliderArrow';
 
 export interface PostProps {
   img: {
@@ -22,11 +22,13 @@ const PostSlider = ({
   title: string;
   posts: PostProps[];
 }) => {
-  const [ref] = useKeenSlider<HTMLDivElement>({
-    loop: true,
+  const { currentSlide, instanceRef, loaded, ref } = useSlider({
     slides: {
       perView: 3,
       spacing: 30,
+    },
+    slideChanged(s) {
+      console.log('changed');
     },
   });
 
@@ -42,6 +44,29 @@ const PostSlider = ({
           </div>
         ))}
       </div>
+      {loaded && instanceRef.current && (
+        <>
+          <Arrow
+            fillColor="#000"
+            left
+            onClick={(e: any) =>
+              e.stopPropagation() || instanceRef.current?.prev()
+            }
+            disabled={currentSlide === 0}
+          />
+
+          <Arrow
+            fillColor="#000"
+            onClick={(e: any) =>
+              e.stopPropagation() || instanceRef.current?.next()
+            }
+            disabled={
+              currentSlide ===
+              instanceRef.current.track.details.slides.length - 1
+            }
+          />
+        </>
+      )}
     </Container>
   );
 };
