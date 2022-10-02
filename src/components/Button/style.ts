@@ -19,12 +19,12 @@ export const StyledButton = styled.button<ButtonProps>`
   font-size: ${(props) =>
     props.size === 'sm' ? '1' : props.size === 'md' ? '2' : '3.5'}rem;
   padding: 0.5em 1.5em;
+  transition: ${transition};
 
   &:hover {
     background-color: ${(props) => (props.hoverBg ? props.hoverBg : '#fff')};
     border-color: ${(props) =>
       props.hoverBorder ? props.hoverBorder : '#fff'};
     color: ${(props) => props.theme.mainColor};
-    transition: ${transition};
   }
 `;

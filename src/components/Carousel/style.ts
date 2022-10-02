@@ -46,7 +46,7 @@ export const CarouselCaptionContent = styled.h3`
 export const CarouselDots = styled.div`
   display: flex;
   position: absolute;
-  bottom: 5px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
 `;

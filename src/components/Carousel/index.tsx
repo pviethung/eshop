@@ -51,7 +51,7 @@ const Carousel = () => {
           <CarouselCaptionWrap style={style}>
             <CarouselCaptionTitle>{item.title}</CarouselCaptionTitle>
             <CarouselCaptionContent>{item.content}</CarouselCaptionContent>
-            <Button size="lg" hoverBg={mainColor} hoverBorder={mainColor} fill>
+            <Button size="lg" hoverBorder={mainColor} fill>
               Shop now
             </Button>
           </CarouselCaptionWrap>
