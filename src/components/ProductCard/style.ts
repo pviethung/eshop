@@ -43,6 +43,7 @@ export const ProductTitle = styled.h4`
 export const ProductPrice = styled.p`
   font-size: 2.5rem;
   margin: 15px 0;
+  color: ${(props) => props.theme.mainColor};
 `;
 
 export const ProductAddBtn = styled(StyledButton)`

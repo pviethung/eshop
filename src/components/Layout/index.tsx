@@ -1,3 +1,5 @@
+import Divider from '../Divider';
+import Footer from '../Footer';
 import Header from '../Header';
 import NavBar from '../NavBar';
 
@@ -9,7 +11,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <NavBar />
         {children}
       </main>
-      <div>Footer go here</div>
+      <Divider x={30} />
+      <Footer />
     </>
   );
 };

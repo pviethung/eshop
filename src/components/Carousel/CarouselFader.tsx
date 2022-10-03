@@ -20,6 +20,7 @@ const CarouselFader = ({ images, onSlideChange }: CarouselFaderProps) => {
   const [opacities, setOpacities] = useState<number[]>([]);
   const { currentSlide, instanceRef, loaded, ref } = useSlider({
     slides: images.length,
+    loop: true,
     detailsChanged(s) {
       const new_opacities = s.track.details.slides.map(
         (slide) => slide.portion

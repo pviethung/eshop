@@ -16,9 +16,6 @@ const ProductSlider = ({
       perView: 4,
       spacing: 0,
     },
-    slideChanged(s) {
-      console.log('images changed');
-    },
   });
 
   return (

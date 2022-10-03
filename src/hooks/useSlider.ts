@@ -7,11 +7,7 @@ interface SliderHookProps {}
 const useSlider = (options?: KeenSliderOptions) => {
   const { slideChanged, created, ...customConfig } = options || {};
   const defaultConfig = {
-    loop: true,
-    slides: {
-      perView: 3,
-      spacing: 0,
-    },
+    loop: false,
     slideChanged(slider: KeenSliderInstance) {
       setCurrentSlide(slider.track.details.rel);
       if (slideChanged) slideChanged(slider);

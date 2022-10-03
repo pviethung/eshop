@@ -22,13 +22,11 @@ const PostSlider = ({
   title: string;
   posts: PostProps[];
 }) => {
+  const slidesPerView = 3;
   const { currentSlide, instanceRef, loaded, ref } = useSlider({
     slides: {
-      perView: 3,
+      perView: slidesPerView,
       spacing: 30,
-    },
-    slideChanged(s) {
-      console.log('changed');
     },
   });
 
@@ -61,8 +59,8 @@ const PostSlider = ({
               e.stopPropagation() || instanceRef.current?.next()
             }
             disabled={
-              currentSlide ===
-              instanceRef.current.track.details.slides.length - 1
+              currentSlide + slidesPerView >=
+              instanceRef.current.track.details.slides.length
             }
           />
         </>

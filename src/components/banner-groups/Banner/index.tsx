@@ -10,6 +10,7 @@ interface Banner {
   width: number;
   height: number;
   btnStyle?: 'fill';
+  hasBtn?: boolean;
 }
 
 const Banner = ({ banner }: { banner: Banner }) => {
@@ -24,16 +25,17 @@ const Banner = ({ banner }: { banner: Banner }) => {
       />
       <BannerContent>
         <BannerTitle>{banner.title}</BannerTitle>
-        <BannerDesc>{banner.desc}</BannerDesc>
-        {banner.btnStyle === 'fill' ? (
-          <Button size="md" hoverBorder={mainColor} fill>
-            Shop now
-          </Button>
-        ) : (
-          <Button size="md" hoverBorder={mainColor}>
-            Shop now
-          </Button>
-        )}
+        {banner.desc !== '' && <BannerDesc>{banner.desc}</BannerDesc>}
+        {banner.hasBtn === false ||
+          (banner.btnStyle === 'fill' ? (
+            <Button size="md" hoverBorder={mainColor} fill>
+              Shop now
+            </Button>
+          ) : (
+            <Button size="md" hoverBorder={mainColor}>
+              Shop now
+            </Button>
+          ))}
       </BannerContent>
     </StyledBanner>
   );

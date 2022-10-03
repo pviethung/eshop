@@ -13,9 +13,6 @@ const Arrow = (props: {
       disabled={props.disabled}
       left={props.left}
       onClick={props.onClick}
-      className={`arrow ${
-        props.left ? 'arrow--left' : 'arrow--right'
-      } ${disabeld}`}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >

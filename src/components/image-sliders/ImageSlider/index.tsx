@@ -17,9 +17,6 @@ const ImageSlider = ({ images }: { images: ImageProps[] }) => {
       perView: 6,
       spacing: 0,
     },
-    slideChanged(s) {
-      console.log('images changed');
-    },
   });
 
   return (
