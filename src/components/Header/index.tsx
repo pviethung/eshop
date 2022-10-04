@@ -2,12 +2,17 @@ import { AppContainer } from '../GlobalStyle';
 import { ActionItem, Actions, StyledHeader } from './style';
 import { BsHandbag, BsSearch, BsPerson } from 'react-icons/bs';
 import Logo from '../Logo';
+import Link from 'next/link';
 
 const Header = () => {
   return (
     <AppContainer>
       <StyledHeader>
-        <Logo />
+        <Link href="/">
+          <a>
+            <Logo />
+          </a>
+        </Link>
         <Actions>
           <ActionItem>
             <BsSearch />

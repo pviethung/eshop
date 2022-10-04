@@ -8,10 +8,10 @@ import {
   NewsLetterTitle,
 } from './style';
 import * as Yup from 'yup';
-import InputEmail from '../form-fields/InputEmail';
 import Button from '../Button';
 import { useTheme } from 'styled-components';
 import { AppContainer } from '../GlobalStyle';
+import EmailField from '../forms/EmailField';
 
 const Footer = () => {
   const { mainColor } = useTheme();
@@ -28,11 +28,6 @@ const Footer = () => {
               email: '',
             }}
             validateOnChange={false}
-            validationSchema={Yup.object({
-              email: Yup.string()
-                .email('Invalid email address')
-                .required('This field is required.'),
-            })}
             onSubmit={(values, formik) => {
               setTimeout(() => {
                 alert(JSON.stringify(values, null, 2));
@@ -42,8 +37,13 @@ const Footer = () => {
           >
             {(formik) => (
               <Form noValidate>
-                <InputEmail name="email" id="email" />
-                <Button type="submit" hoverBorder={mainColor} size="md" fill>
+                <EmailField name="email" id="email" />
+                <Button
+                  type="submit"
+                  hoverBorder={mainColor}
+                  size="md"
+                  fill="true"
+                >
                   SUBSCRIBE
                 </Button>
               </Form>

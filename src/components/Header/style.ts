@@ -5,6 +5,10 @@ interface ActionItemProps {
 }
 
 export const StyledHeader = styled.header`
+  a {
+    text-decoration: none;
+    color: initial;
+  }
   display: flex;
   position: relative;
   justify-content: center;

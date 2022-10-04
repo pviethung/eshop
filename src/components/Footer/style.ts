@@ -1,6 +1,6 @@
 import { StyledLogo } from './../Logo/style';
-import { StyledField } from './../form-fields/FormField/style';
 import styled from 'styled-components';
+import { StyledField } from '../forms/InputField/style';
 
 export const Container = styled.div``;
 

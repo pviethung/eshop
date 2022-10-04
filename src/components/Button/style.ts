@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { transition } from '../GlobalStyle';
 
 export interface ButtonProps {
-  fill?: boolean;
+  fill?: 'true' | undefined;
   size: 'sm' | 'md' | 'lg';
   hoverBg?: string;
   hoverBorder?: string;

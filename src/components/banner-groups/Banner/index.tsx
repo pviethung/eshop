@@ -28,7 +28,7 @@ const Banner = ({ banner }: { banner: Banner }) => {
         {banner.desc !== '' && <BannerDesc>{banner.desc}</BannerDesc>}
         {banner.hasBtn === false ||
           (banner.btnStyle === 'fill' ? (
-            <Button size="md" hoverBorder={mainColor} fill>
+            <Button size="md" hoverBorder={mainColor} fill="true">
               Shop now
             </Button>
           ) : (
