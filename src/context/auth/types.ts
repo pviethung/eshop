@@ -1,20 +1,12 @@
 import { Dispatch } from 'react';
+import { User } from '../../models';
 
 export enum AUTH_ACTIONS {
   SIGNUP = 'signup',
   LOGIN = 'login',
   LOGOUT = 'logout',
 }
-export interface User {
-  displayName: string;
-  email: string;
-  expiresIn: string;
-  idToken: string;
-  kind: string;
-  localId: string;
-  refreshToken: string;
-  registered: boolean;
-}
+
 export interface LoginAction {
   type: AUTH_ACTIONS.LOGIN;
   payload: User;

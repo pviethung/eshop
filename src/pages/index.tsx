@@ -5,7 +5,6 @@ import HomeBanners3 from '../components/banner-groups/HomeBanners3';
 import Carousel from '../components/Carousel';
 import Divider from '../components/Divider';
 import HomeBrands from '../components/image-sliders/HomeBrands';
-import Logo from '../components/Logo';
 import HomePost from '../components/post-sliders/HomePosts';
 import HomeFeatured from '../components/product-sliders/HomeFeaturedProducts';
 import HomeNew from '../components/product-sliders/HomeNewProducts';

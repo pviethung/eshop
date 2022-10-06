@@ -1,8 +1,8 @@
-import { Container, PostSliderHeader } from './style';
-import SliderTitle from '../../SliderTitle';
+import { useSlider } from '../../../hooks';
 import PostCard from '../../PostCard';
-import useSlider from '../../../hooks/useSlider';
 import Arrow from '../../SliderArrow';
+import SliderTitle from '../../SliderTitle';
+import { Container, PostSliderHeader } from './style';
 
 export interface PostProps {
   img: {

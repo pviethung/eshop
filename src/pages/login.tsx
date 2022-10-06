@@ -6,8 +6,10 @@ import Col from '../components/grid-layout/Col';
 import Row from '../components/grid-layout/Row';
 import PageTitle from '../components/PageTitle';
 import RegisterCTA from '../components/RegisterCTA';
-import { AUTH_ACTIONS, User } from '../context/auth';
-import useAuthContext from '../hooks/useAuthContext';
+import { AUTH_ACTIONS } from '../context/auth';
+import { useAuthContext } from '../hooks';
+
+import { User } from '../models';
 
 const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 

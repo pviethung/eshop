@@ -1,8 +1,7 @@
-import { useKeenSlider } from 'keen-slider/react';
+import { useSlider } from '../../../hooks';
 import ProductCard, { ProductProps } from '../../ProductCard';
-import { Container } from './style';
 import SliderTitle from '../../SliderTitle';
-import useSlider from '../../../hooks/useSlider';
+import { Container } from './style';
 
 const ProductSlider = ({
   title,

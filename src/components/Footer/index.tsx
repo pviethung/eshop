@@ -1,4 +1,8 @@
 import { Form, Formik } from 'formik';
+import { useTheme } from 'styled-components';
+import Button from '../Button';
+import EmailField from '../forms/EmailField';
+import { AppContainer } from '../GlobalStyle';
 import Logo from '../Logo';
 import {
   Container,
@@ -7,11 +11,6 @@ import {
   FooterNewsLetter,
   NewsLetterTitle,
 } from './style';
-import * as Yup from 'yup';
-import Button from '../Button';
-import { useTheme } from 'styled-components';
-import { AppContainer } from '../GlobalStyle';
-import EmailField from '../forms/EmailField';
 
 const Footer = () => {
   const { mainColor } = useTheme();
@@ -52,7 +51,7 @@ const Footer = () => {
         </FooterNewsLetter>
         <FooterCopyright>
           <Logo />
-          <span>© 2018. All Rights Reserved.</span>
+          <span>© 2022. All Rights Reserved.</span>
         </FooterCopyright>
       </Container>
     </AppContainer>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 interface SliderHookProps {}
 
-const useSlider = (options?: KeenSliderOptions) => {
+export const useSlider = (options?: KeenSliderOptions, plugins?: any) => {
   const { slideChanged, created, ...customConfig } = options || {};
   const defaultConfig = {
     loop: false,
@@ -21,11 +21,13 @@ const useSlider = (options?: KeenSliderOptions) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
-  const [ref, instanceRef] = useKeenSlider<HTMLDivElement>({
-    ...defaultConfig,
-    ...customConfig,
-  });
+  const [ref, instanceRef] = useKeenSlider<HTMLDivElement>(
+    {
+      ...defaultConfig,
+      ...customConfig,
+    },
+    plugins ? [plugins] : undefined
+  );
 
   return { currentSlide, loaded, ref, instanceRef };
 };
-export default useSlider;
