@@ -18,6 +18,12 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-size: 1.6rem;
     font-family: 'Ubuntu', sans-serif;
+   
+  }
+  p {
+    font-weight: 400;
+    color: #777;
+    margin-bottom: 15px;
   }
 `;
 
