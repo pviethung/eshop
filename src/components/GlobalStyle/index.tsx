@@ -25,6 +25,14 @@ const GlobalStyle = createGlobalStyle`
     color: #777;
     margin-bottom: 15px;
   }
+
+  .react-rater > * {
+    padding: 0 2px;
+  }
+  .enlargedImageContainer {
+    z-index: 1;
+  }
+  
 `;
 
 export const AppContainer = styled.div`

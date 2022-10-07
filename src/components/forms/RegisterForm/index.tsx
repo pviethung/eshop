@@ -1,13 +1,13 @@
-import { Form, Formik, FormikHelpers } from 'formik';
-import { Container } from './style';
-import Button from '../../Button';
-import { useTheme } from 'styled-components';
-import FormWrap from '../FormWrap';
-import EmailField from '../EmailField';
-import TextField from '../TextField';
-import PasswordField from '../PasswordField';
 import axios from 'axios';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { useRouter } from 'next/router';
+import { useTheme } from 'styled-components';
+import Button from '../../Button';
+import EmailField from '../EmailField';
+import FormWrap from '../FormWrap';
+import PasswordField from '../PasswordField';
+import TextField from '../TextField';
+import { Container } from './style';
 
 interface FormValues {
   firstname: string;

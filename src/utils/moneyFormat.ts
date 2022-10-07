@@ -1,3 +1,3 @@
 export const moneyFormat = (x: number) => {
-  return x.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+  return x.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };

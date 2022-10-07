@@ -1,3 +1,4 @@
+import { Review } from './Review';
 export interface Product {
   id: string;
   inventory_quantity: number;
@@ -10,5 +11,5 @@ export interface Product {
   sizes: string[];
   images: string[];
   tags: string[];
-  reviews: [];
+  reviews: Review[];
 }

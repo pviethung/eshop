@@ -1,5 +1,5 @@
-import InputField, { InputFieldProps } from '../InputField';
 import * as Yup from 'yup';
+import InputField, { InputFieldProps } from '../InputField';
 
 const TextField = (props: InputFieldProps) => {
   const validate = (value: any) => {

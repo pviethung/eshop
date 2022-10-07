@@ -1,5 +1,5 @@
+import { Field, useField } from 'formik';
 import { Container, Label, StyledField } from './style';
-import { Field, FieldProps, useField } from 'formik';
 
 export interface InputFieldProps {
   type?: string;
