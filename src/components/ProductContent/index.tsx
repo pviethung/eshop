@@ -7,10 +7,7 @@ import Button from '../Button';
 import TextField from '../forms/TextField';
 
 import PageTitle from '../PageTitle';
-import ProductReviews from '../ProductReviews';
 import ProductReviewStars from '../ProductReviewStars';
-import SizeGuide from '../SizeGuide';
-import Tabs from '../Tabs';
 
 import {
   Container,
@@ -18,7 +15,6 @@ import {
   ProductAvailability,
   ProductDescription,
   ProductPrice,
-  ProductTabs,
   ProductTags,
 } from './style';
 
@@ -54,6 +50,7 @@ const ProductContent = ({ product }: { product: Product }) => {
       </ProductAvailability>
       <PageTitle>{product.title}</PageTitle>
       <ProductPrice>{moneyFormat(product.price)}</ProductPrice>
+      {/* TODO add text no reviews */}
       <ProductReviewStars interactive={false} rating={productReviewStars} />
       <ProductDescription>{product.description}</ProductDescription>
       <ProductTags>
@@ -83,14 +80,6 @@ const ProductContent = ({ product }: { product: Product }) => {
           </Form>
         </Formik>
       </ProductAddToCart>
-      <ProductTabs>
-        <Tabs
-          tabs={[
-            { 'Size guide': <SizeGuide /> },
-            { 'Comments': <ProductReviews reviews={product.reviews} /> },
-          ]}
-        />
-      </ProductTabs>
     </Container>
   );
 };

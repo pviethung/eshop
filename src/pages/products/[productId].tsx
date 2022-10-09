@@ -7,8 +7,12 @@ import ProductContent from '../../components/ProductContent';
 import ProductSliderThumbs from '../../components/ProductSliderThumbs';
 import { Product } from '../../models';
 import { getProduct, getProductIds } from '../../services/firebase';
-
 //@ts-ignore
+import FireStoreParser from 'firestore-parser';
+import { ProductTabs } from '../../components/ProductContent/style';
+import ProductReviews from '../../components/ProductReviews';
+import SizeGuide from '../../components/SizeGuide';
+import Tabs from '../../components/Tabs';
 
 const DUMMY: Product = {
   id: '1',
@@ -33,41 +37,48 @@ const DUMMY: Product = {
 
 interface PageProps {
   product: null | Product;
+  unparsedProduct: any;
 }
 
 export const getStaticPaths: GetStaticPaths<{
   productId: string;
 }> = async () => {
-  // const test = rs.map((i: any) => {
-  //   console.log(FireStoreParser(i.fields));
-  // });
-  // console.log(FireStoreParser(rs[0].fields));
+  try {
+    const ids = await getProductIds();
 
-  return {
-    paths: [{ params: { productId: '3yTxnxt3H3h26hVwQAnM' } }],
-    fallback: false, // can also be true or 'blocking'
-  };
+    return {
+      paths: ids.map((id: any) => ({
+        params: {
+          productId: id.id,
+        },
+      })),
+      fallback: false,
+    };
+  } catch (err) {
+    throw err;
+  }
 };
+
 export const getStaticProps: GetStaticProps<
   PageProps,
   { productId: string }
 > = async ({ params }) => {
   const productId = params?.productId;
 
-  //TODO if productId undef
   if (!productId)
     return {
       notFound: true,
     };
 
   try {
-    const product = await getProduct(productId);
-    const rs = await getProductIds();
+    const rs = await getProduct(productId);
 
-    // console.log('[server side parsed product]', product);
+    const unparsedProduct = { ...rs };
+    const product = FireStoreParser(rs);
 
     return {
       props: {
+        unparsedProduct,
         product,
       },
     };
@@ -76,7 +87,7 @@ export const getStaticProps: GetStaticProps<
   }
 };
 
-const ProductPage = ({ product }: PageProps) => {
+const ProductPage = ({ product, unparsedProduct }: PageProps) => {
   return (
     <AppContainer>
       <Divider x={60} />
@@ -90,6 +101,21 @@ const ProductPage = ({ product }: PageProps) => {
           </Col>
           <Col w={1 / 2}>
             <ProductContent product={product} />
+            <ProductTabs>
+              <Tabs
+                tabs={[
+                  { 'Size guide': <SizeGuide /> },
+                  {
+                    'Comments': (
+                      <ProductReviews
+                        productId={product.id}
+                        // use this prop for post reviews to firestore api
+                      />
+                    ),
+                  },
+                ]}
+              />
+            </ProductTabs>
           </Col>
         </Row>
       )}

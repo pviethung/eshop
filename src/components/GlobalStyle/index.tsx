@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
   .react-rater > * {
     padding: 0 2px;
   }
+ 
   .enlargedImageContainer {
     z-index: 1;
   }

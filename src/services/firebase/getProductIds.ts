@@ -1,20 +1,19 @@
-import axios from 'axios';
-import { BASE_URL } from './baseUrl';
 //@ts-ignore
 import FireStoreParser from 'firestore-parser';
+import { axiosInstance } from './axiosInstance';
 
 //{document_path}?updateMask.fieldPaths=status&updateMask.fieldPaths=title
 
 export const getProductIds = async () => {
   try {
-    const rs = await axios({
-      url: `${BASE_URL}/products?mask.fieldPaths=id`,
+    const rs = await axiosInstance({
+      url: `products?mask.fieldPaths=id&pageSize=50`,
       method: 'GET',
     });
 
-    console.log('[FireStoreParser of getProductIds()]', FireStoreParser);
-
-    // return rs.data?.documents;
+    return rs.data?.documents.map((document: any) =>
+      FireStoreParser(document.fields)
+    );
   } catch (err) {
     throw err;
   }

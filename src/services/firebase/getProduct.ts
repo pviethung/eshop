@@ -1,19 +1,12 @@
-import axios from 'axios';
-import { BASE_URL } from './baseUrl';
-
-//@ts-ignore
-import FireStoreParser from 'firestore-parser';
+import { axiosInstance } from './axiosInstance';
 
 export const getProduct = async (id: string) => {
   try {
-    const rs = await axios({
-      url: `${BASE_URL}/products/${id}`,
-      method: 'GET',
+    const rs = await axiosInstance({
+      url: `products/${id}`,
     });
 
-    console.log('[FireStoreParser of getProduct()]', FireStoreParser);
-
-    return FireStoreParser(rs.data.fields);
+    return rs.data.fields;
   } catch (err) {
     throw err;
   }

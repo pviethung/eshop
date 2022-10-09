@@ -32,8 +32,8 @@ export const ProductTags = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 40px;
+  gap: 15px;
   > div {
-    margin-right: 15px;
     padding: 15px;
     background-color: #e5e7eb;
     border-radius: 3px;
