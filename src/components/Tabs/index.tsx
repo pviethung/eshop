@@ -7,7 +7,7 @@ interface TabData {
   [key: string]: string | React.ReactNode;
 }
 
-const Tabs = ({ tabs }: { tabs: TabData[] }) => {
+const Tabs = ({ tabs, activeTab }: { activeTab: number; tabs: TabData[] }) => {
   const tabsTitles: string | React.ReactNode[] = [];
   const tabsContents: string | React.ReactNode[] = [];
 
@@ -20,7 +20,7 @@ const Tabs = ({ tabs }: { tabs: TabData[] }) => {
 
   return (
     <Container>
-      <ReactTabs>
+      <ReactTabs defaultIndex={activeTab}>
         <TabList>
           {tabsTitles.map((title, idx) => (
             <Tab key={idx}>

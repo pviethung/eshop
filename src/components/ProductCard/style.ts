@@ -1,5 +1,6 @@
-import { StyledButton } from './../Button/style';
 import styled from 'styled-components';
+import { StyledButton } from './../Button/style';
+import { boxShadow } from './../GlobalStyle/index';
 
 export const ProductActions = styled.div`
   position: absolute;
@@ -18,11 +19,11 @@ export const Container = styled.div`
   padding: 0 15px;
   &:hover {
     ${ProductInner} {
-      box-shadow: 5px 5px 10px #00000014;
+      box-shadow: ${boxShadow};
     }
     ${ProductActions} {
       display: block;
-      box-shadow: 5px 8px 10px #00000014;
+      box-shadow: ${boxShadow};
     }
   }
 `;

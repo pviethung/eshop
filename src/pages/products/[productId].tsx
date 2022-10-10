@@ -103,6 +103,7 @@ const ProductPage = ({ product, unparsedProduct }: PageProps) => {
             <ProductContent product={product} />
             <ProductTabs>
               <Tabs
+                activeTab={0}
                 tabs={[
                   { 'Size guide': <SizeGuide /> },
                   {

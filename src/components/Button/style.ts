@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 import { transition } from '../GlobalStyle';
-
-export interface ButtonProps {
-  fill?: 'true' | undefined;
-  size: 'sm' | 'md' | 'lg';
-  hoverBg?: string;
-  hoverBorder?: string;
-}
+import { ButtonProps } from './index';
 
 export const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
@@ -16,6 +10,7 @@ export const StyledButton = styled.button<ButtonProps>`
   border: 2px solid ${(props) => (!props.fill ? '#fff' : props.theme.mainColor)};
   background-color: ${(props) =>
     props.fill ? props.theme.mainColor : 'transparent'};
+
   font-size: ${(props) =>
     props.size === 'sm' ? '1' : props.size === 'md' ? '2' : '3.5'}rem;
   padding: 0.5em 1.5em;
@@ -27,4 +22,7 @@ export const StyledButton = styled.button<ButtonProps>`
       props.hoverBorder ? props.hoverBorder : '#fff'};
     color: ${(props) => props.theme.mainColor};
   }
+
+  background-color: ${(props) => (props.disabled ? '#e5e5e5' : undefined)};
+  border-color: ${(props) => (props.disabled ? 'transparent' : undefined)};
 `;

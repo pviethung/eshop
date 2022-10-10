@@ -2,13 +2,14 @@ import axios from 'axios';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useTheme } from 'styled-components';
 import { User } from '../../../models';
-import Button from '../../Button';
+import ButtonWithState from '../../ButtonWithState';
 import Divider from '../../Divider';
 import EmailField from '../EmailField';
 import FormTitle from '../FormTitle';
 import FormWrap from '../FormWrap';
 import PasswordField from '../PasswordField';
 
+//@ts-ignore
 interface FormValues {
   email: string;
   password: string;
@@ -32,15 +33,11 @@ const LoginForm = ({ onLoginSuccess, onLoginError }: LoginFormProps) => {
   ) => {
     try {
       const rs = await axios({
-        url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        url: `/api/auth/login`,
         data: {
           email: values.email,
           password: values.password,
-          returnSecureToken: true,
         },
       });
       onLoginSuccess(rs.data);
@@ -61,18 +58,30 @@ const LoginForm = ({ onLoginSuccess, onLoginError }: LoginFormProps) => {
         validateOnChange={false}
         onSubmit={handleSubmit}
       >
-        <Form noValidate>
-          <EmailField label="Email address" required id="email" name="email" />
-          <PasswordField
-            label="Password"
-            required
-            name="password"
-            id="password"
-          />
-          <Button type="submit" hoverBorder={mainColor} size="md" fill="true">
-            Login
-          </Button>
-        </Form>
+        {(props) => (
+          <Form noValidate>
+            <EmailField
+              label="Email address"
+              required
+              id="email"
+              name="email"
+            />
+            <PasswordField
+              label="Password"
+              required
+              name="password"
+              id="password"
+            />
+            <ButtonWithState
+              innerText="login"
+              loading={props.isSubmitting}
+              type="submit"
+              hoverBorder={mainColor}
+              size="md"
+              fill="true"
+            />
+          </Form>
+        )}
       </Formik>
     </FormWrap>
   );

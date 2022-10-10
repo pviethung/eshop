@@ -6,11 +6,14 @@ export const Container = styled.div`
 `;
 export const CommentList = styled.ul`
   list-style: none;
+  max-height: 415px;
+  overflow-y: auto;
 `;
 
 export const CommentRating = styled.div`
   > div {
     margin: 0 0 15px;
+    text-align: right;
   }
   p {
     font-size: 14px;
@@ -25,6 +28,12 @@ export const CommentItem = styled.li`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  > div {
+    max-width: calc(100% - 125px);
+    > h4 {
+      margin-bottom: 15px;
+    }
+  }
 `;
 export const CommentForm = styled.div`
   form {

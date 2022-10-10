@@ -8,11 +8,14 @@ import HomeBrands from '../components/image-sliders/HomeBrands';
 import HomePost from '../components/post-sliders/HomePosts';
 import HomeFeatured from '../components/product-sliders/HomeFeaturedProducts';
 import HomeNew from '../components/product-sliders/HomeNewProducts';
+import { useAuthContext } from '../hooks';
 
 // import Head from 'next/head';
 // import Image from 'next/image';
 
 const Home: NextPage = () => {
+  const { user } = useAuthContext();
+
   return (
     <>
       <Divider x={40} />

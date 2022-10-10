@@ -1,7 +1,12 @@
-import { ButtonProps as StyledButtonProps, StyledButton } from './style';
+import { StyledButton } from './style';
 
-interface ButtonProps extends StyledButtonProps {
+export interface ButtonProps {
+  fill?: 'true' | undefined;
+  size: 'sm' | 'md' | 'lg';
+  hoverBg?: string;
+  hoverBorder?: string;
   children: React.ReactNode;
+  disabled?: boolean;
 }
 
 const Button = ({

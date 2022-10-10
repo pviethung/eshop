@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 1;
+`;
 
 export const MainImage = styled.div``;
 export const Thumbs = styled.div`

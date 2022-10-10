@@ -1,4 +1,5 @@
-import styled, { useTheme } from 'styled-components';
+import Link from 'next/link';
+import { useTheme } from 'styled-components';
 import Button from '../Button';
 import Divider from '../Divider';
 import FormTitle from '../forms/FormTitle';
@@ -15,9 +16,11 @@ const RegisterCTA = () => {
         track your orders in your account and more.
       </p>
       <Divider x={30} />
-      <Button size="md" hoverBorder={mainColor} fill="true">
-        create an account
-      </Button>
+      <Link href="/register">
+        <Button size="md" hoverBorder={mainColor} fill="true">
+          create an account
+        </Button>
+      </Link>
     </FormWrap>
   );
 };

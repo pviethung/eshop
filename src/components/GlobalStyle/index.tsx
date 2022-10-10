@@ -26,6 +26,9 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 15px;
   }
 
+  .loading-spinner {
+    text-align: center;
+  }
   .react-rater > * {
     padding: 0 2px;
   }
@@ -55,5 +58,5 @@ export const screen = {
 
 export const transition = 'all 0.2s ease-in';
 export const colors = ['#fa6b6b', '#7635dc', '#00AB55', '#1ccaff', '#2065d1'];
-
+export const boxShadow = '5px 5px 10px #00000014';
 export default GlobalStyle;

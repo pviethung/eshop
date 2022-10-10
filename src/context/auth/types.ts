@@ -11,7 +11,10 @@ export interface LoginAction {
   type: AUTH_ACTIONS.LOGIN;
   payload: User;
 }
-export type AuthAction = LoginAction;
+export interface LogoutAction {
+  type: AUTH_ACTIONS.LOGOUT;
+}
+export type AuthAction = LoginAction | LogoutAction;
 export interface AuthState {
   user: User | null;
   dispatch: Dispatch<AuthAction>;

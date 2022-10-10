@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { useRouter } from 'next/router';
 import Divider from '../components/Divider';
 import LoginForm from '../components/forms/LoginForm';
 import { AppContainer } from '../components/GlobalStyle';
@@ -15,23 +15,14 @@ const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 
 const Login = () => {
   const { dispatch } = useAuthContext();
+  const router = useRouter();
 
   const handleSuccess = (user: User) => {
-    console.log('[login page] logged user: ', user);
     dispatch({
       type: AUTH_ACTIONS.LOGIN,
       payload: user,
     });
-
-    axios({
-      method: 'GET',
-      url: `https://firestore.googleapis.com/v1/projects/eshop-657e0/databases/(default)/documents/users/${user.localId}`,
-      headers: {
-        'Authorization': `Bearer ${user.idToken}`,
-      },
-    }).then((data) => {
-      console.log(data);
-    });
+    router.push('/');
 
     // TODOs
     // navigate to somewhere

@@ -1,3 +1,4 @@
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
@@ -5,12 +6,13 @@ import * as Yup from 'yup';
 import { Review } from '../../models/Review';
 
 import { getRandomId } from '../../utils/getRandomId';
-import Button from '../Button';
 import ProductReviewStars from '../ProductReviewStars';
 //@ts-ignore
 import FireStoreParser from 'firestore-parser';
+import { BeatLoader } from 'react-spinners';
 import useSWR from 'swr';
 import { getComments, postComment } from '../../services/firebase';
+import ButtonWithState from '../ButtonWithState';
 import {
   CommentForm,
   CommentItem,
@@ -35,10 +37,20 @@ const ProductReviews = ({ productId }: { productId: string }) => {
   if (error) return <div>failed to load</div>;
 
   //TODO loading state
-  if (!data) return <div>loading...</div>;
+  if (!data)
+    return (
+      <div className="loading-spinner">
+        <BeatLoader color={mainColor} />
+      </div>
+    );
 
-  const unparsedReviews = [...data.arrayValue.values];
-  const reviews: Review[] = FireStoreParser(data.arrayValue.values);
+  console.log(data);
+
+  const unparsedReviews = data.arrayValue?.values
+    ? [...data.arrayValue.values]
+    : [];
+  const reviews: Review[] =
+    unparsedReviews.length > 0 ? FireStoreParser(data.arrayValue.values) : [];
 
   return (
     <Container>
@@ -46,15 +58,21 @@ const ProductReviews = ({ productId }: { productId: string }) => {
         <CommentList>
           {reviews.map((review) => (
             <CommentItem key={review.id}>
-              <p>{review.content}</p>
-
+              <div>
+                <h4>{review.displayName}</h4>
+                <p>{review.content}</p>
+              </div>
               <CommentRating>
                 <ProductReviewStars
                   interactive={false}
                   key={review.id}
                   rating={review.rate}
                 />
-                <p>7 months ago</p>
+                <p>
+                  {formatDistanceToNow(new Date(review.createdAt), {
+                    addSuffix: true,
+                  })}
+                </p>
               </CommentRating>
             </CommentItem>
           ))}
@@ -107,41 +125,43 @@ const ProductReviews = ({ productId }: { productId: string }) => {
             setRating(0);
           }}
         >
-          <Form>
-            <div>
-              <p>Your rating: </p>
-              <ProductReviewStars
-                onRate={(e) => {
-                  setRating(e.rating);
-                }}
-                interactive={true}
-                rating={rating}
-              />
-            </div>
-            <div>
-              <CommentTextArea>
-                <Field
-                  rows="5"
-                  cols="40"
-                  as="textarea"
-                  id="comment"
-                  name="comment"
+          {(props) => (
+            <Form>
+              <div>
+                <p>Your rating: </p>
+                <ProductReviewStars
+                  onRate={(e) => {
+                    setRating(e.rating);
+                  }}
+                  interactive={true}
+                  rating={rating}
                 />
-                <p>
-                  <ErrorMessage name="comment" />
-                </p>
-              </CommentTextArea>
+              </div>
+              <div>
+                <CommentTextArea>
+                  <Field
+                    rows="5"
+                    cols="40"
+                    as="textarea"
+                    id="comment"
+                    name="comment"
+                  />
+                  <p>
+                    <ErrorMessage name="comment" />
+                  </p>
+                </CommentTextArea>
 
-              <Button
-                size="md"
-                type="submit"
-                fill="true"
-                hoverBorder={mainColor}
-              >
-                Send
-              </Button>
-            </div>
-          </Form>
+                <ButtonWithState
+                  innerText={'Send'}
+                  loading={props.isSubmitting}
+                  size="md"
+                  type="submit"
+                  fill="true"
+                  hoverBorder={mainColor}
+                />
+              </div>
+            </Form>
+          )}
         </Formik>
       </CommentForm>
     </Container>
