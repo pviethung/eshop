@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { Product } from '../../models';
-import { intersectProductLists } from '../../utils';
 import CollectionFilterPrice from '../CollectionFilterPrice';
 import CollectionFilterSize from '../CollectionFilterSize';
 import CollectionLayout from '../CollectionLayout';
@@ -12,6 +11,58 @@ import Row from '../grid-layout/Row';
 import PageTitle from '../PageTitle';
 import { ActionHeader, CollectionSidebar, Container } from './style';
 
+interface FilterTypes {
+  price: {
+    min: number;
+    max: number;
+  };
+  size: string;
+  sort: {
+    property: keyof Product;
+    order: 'asc' | 'desc';
+  };
+}
+
+const filterController = (products: Product[], filter: FilterTypes) => {
+  let rs: Product[] = products;
+
+  if (filter.price) {
+    rs = products.filter((product) => {
+      return (
+        product.price >= filter.price.min && product.price <= filter.price.max
+      );
+    });
+  }
+
+  if (filter.size) {
+    rs =
+      filter.size === 'all'
+        ? [...rs]
+        : filter.size === 'free size'
+        ? rs.filter((p) => {
+            return p.sizes.length === 0;
+          })
+        : rs.filter((p) => {
+            return p.sizes.includes(filter.size);
+          });
+  }
+
+  if (filter.sort) {
+    rs = [
+      ...rs.sort((a, b) => {
+        if (a[filter.sort.property] > b[filter.sort.property]) return 1;
+        if (a[filter.sort.property] < b[filter.sort.property]) return -1;
+        return 0;
+      }),
+    ];
+    if (filter.sort.order === 'desc') rs.reverse();
+  }
+
+  return [...rs];
+};
+
+////////////////////////
+
 const CollectionContent = ({
   products,
   title,
@@ -20,11 +71,8 @@ const CollectionContent = ({
   title: string;
 }) => {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
-  let filteredProducts: Product[] = [];
-
-  const [sortedProducts, setSortedProducts] = useState(products);
-  const [priceFilteredProducts, setPriceFilteredProducts] = useState(products);
-  const [sizeFilteredProducts, setSizeFilteredProducts] = useState(products);
+  const [filter, setFilter] = useState<FilterTypes | null>(null);
+  let filteredProducts = products;
 
   const handleSelectLayout = (layout: 'grid' | 'list') => {
     setLayout(layout);
@@ -33,32 +81,47 @@ const CollectionContent = ({
     console.log(showBy);
   };
 
-  const handleSortProducts = (sortedProducts: Product[]) => {
-    setSortedProducts(sortedProducts);
+  const handleSortProducts = (
+    property: keyof Product,
+    order: 'asc' | 'desc'
+  ) => {
+    setFilter(
+      (prevFilter) =>
+        ({
+          ...prevFilter,
+          sort: {
+            property,
+            order,
+          },
+        } as FilterTypes)
+    );
   };
-  const handleFilterPrice = useCallback((filteredProducts: Product[]) => {
-    setPriceFilteredProducts(filteredProducts);
+  const handleFilterPrice = useCallback((min: number, max: number) => {
+    setFilter(
+      (prevFilter) =>
+        ({
+          ...prevFilter,
+          price: {
+            min,
+            max,
+          },
+        } as FilterTypes)
+    );
   }, []);
-
-  const handleFilterSize = (filteredProducts: Product[]) => {
-    setSizeFilteredProducts(filteredProducts);
+  const handleFilterSize = (size: string) => {
+    setFilter((prevFilter) => ({ ...prevFilter, size } as FilterTypes));
   };
 
-  filteredProducts = intersectProductLists([
-    sortedProducts,
-    priceFilteredProducts,
-    sizeFilteredProducts,
-  ]);
+  if (filter) {
+    filteredProducts = filterController(products, filter) as Product[];
+  }
 
   return (
     <Container>
       <Row>
         <Col w={1 / 4}>
           <CollectionSidebar>
-            <CollectionFilterPrice
-              onFilterPrice={handleFilterPrice}
-              products={products}
-            />
+            <CollectionFilterPrice onFilterPrice={handleFilterPrice} />
             <CollectionFilterSize
               onFilterSize={handleFilterSize}
               products={products}

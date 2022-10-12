@@ -27,7 +27,7 @@ const CollectionSortBy = ({
   products,
 }: {
   products: Product[];
-  onSortProducts: (products: Product[]) => void;
+  onSortProducts: (property: keyof Product, order: 'asc' | 'desc') => void;
 }) => {
   return (
     <Container>
@@ -35,22 +35,14 @@ const CollectionSortBy = ({
       <DropdownSelect
         instanceId={useId()}
         onChange={(option: { value: string; label: string } | null) => {
-          if (!option?.value) return onSortProducts(products);
+          if (!option?.value) return onSortProducts('title', 'asc');
 
           const [sortProperty, sortOrder] = option.value.split('_') as [
             SortProperty,
             SortOrder
           ];
 
-          const sortedProducts = [
-            ...products.sort((a, b) => {
-              if (a[sortProperty] > b[sortProperty]) return 1;
-              if (a[sortProperty] < b[sortProperty]) return -1;
-              return 0;
-            }),
-          ];
-          if (sortOrder === 'desc') sortedProducts.reverse();
-          return onSortProducts(sortedProducts);
+          return onSortProducts(sortProperty, sortOrder);
         }}
         options={SORT_BY}
         defaultValue={SORT_BY[0]}

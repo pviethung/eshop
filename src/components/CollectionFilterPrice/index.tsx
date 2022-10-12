@@ -3,12 +3,10 @@ import { useMemo, useState } from 'react';
 import { getTrackBackground, Range } from 'react-range';
 import { useTheme } from 'styled-components';
 import DropdownCollapsible from '../../DropdownCollapsible';
-import { Product } from '../../models';
 import { moneyFormat } from '../../utils';
 
 interface CollectionFilterPriceProps {
-  products: Product[];
-  onFilterPrice: (products: Product[]) => void;
+  onFilterPrice: (min: number, max: number) => void;
 }
 
 const STEP = 1;
@@ -16,19 +14,19 @@ const MIN = 15;
 const MAX = 300;
 
 const CollectionFilterPrice = ({
-  products,
   onFilterPrice,
 }: CollectionFilterPriceProps) => {
   const [values, setValues] = useState([25, 300]);
   const { mainColor } = useTheme();
   const onFilterPriceMemo = useMemo(
     () =>
-      debounce((products: Product[], min: number, max: number) => {
-        // filter here
-        const filteredProducts = products.filter((product) => {
-          return product.price >= min && product.price <= max;
-        });
-        onFilterPrice(filteredProducts);
+      debounce((min: number, max: number) => {
+        onFilterPrice(min, max);
+        // // filter here
+        // const filteredProducts = products.filter((product) => {
+        //   return product.price >= min && product.price <= max;
+        // });
+        // onFilterPrice(filteredProducts);
       }, 500),
     [onFilterPrice]
   );
@@ -42,7 +40,7 @@ const CollectionFilterPrice = ({
         max={MAX}
         onChange={(values) => {
           setValues(values);
-          onFilterPriceMemo(products, values[0], values[1]);
+          onFilterPriceMemo(values[0], values[1]);
         }}
         renderTrack={({ props, children }) => (
           <div
