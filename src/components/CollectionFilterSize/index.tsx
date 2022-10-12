@@ -12,6 +12,7 @@ const getSizes = (products: Product[]): string[] => {
       }
     });
   });
+
   return sizes.push('free size', 'all'), sizes;
 };
 const CollectionFilterSize = ({
@@ -22,13 +23,13 @@ const CollectionFilterSize = ({
   onFilterSize: (products: Product[]) => void;
 }) => {
   const sizes = useRef<string[]>(getSizes(products));
-  const initialProducts = useRef<Product[]>(products);
   const [activeSize, setActiveSize] = useState('');
 
   const handleActiveSize = () => {};
   const handleSizeClick = (size: string) => {
     return (e: React.MouseEvent) => {
       // toggle active
+      setActiveSize(size);
 
       //filter
       const filteredProducts =

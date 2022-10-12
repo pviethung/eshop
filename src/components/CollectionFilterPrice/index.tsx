@@ -12,7 +12,7 @@ interface CollectionFilterPriceProps {
 }
 
 const STEP = 1;
-const MIN = 25;
+const MIN = 15;
 const MAX = 300;
 
 const CollectionFilterPrice = ({

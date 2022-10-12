@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Product } from '../../models';
-import { intersect } from '../../utils';
+import { intersectProductLists } from '../../utils';
 import CollectionFilterPrice from '../CollectionFilterPrice';
 import CollectionFilterSize from '../CollectionFilterSize';
 import CollectionLayout from '../CollectionLayout';
@@ -20,7 +20,6 @@ const CollectionContent = ({
   title: string;
 }) => {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
-  // const [filteredProducts, setFilteredProducts] = useState(products);
   let filteredProducts: Product[] = [];
 
   const [sortedProducts, setSortedProducts] = useState(products);
@@ -45,13 +44,11 @@ const CollectionContent = ({
     setSizeFilteredProducts(filteredProducts);
   };
 
-  filteredProducts = [
+  filteredProducts = intersectProductLists([
     sortedProducts,
     priceFilteredProducts,
     sizeFilteredProducts,
-  ].reduce((p1, p2) => {
-    return intersect<Product>(p1, p2);
-  });
+  ]);
 
   return (
     <Container>
