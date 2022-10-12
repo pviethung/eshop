@@ -16,7 +16,7 @@ export const ProductActions = styled.div`
 export const ProductInner = styled.div``;
 
 export const Container = styled.div`
-  padding: 0 15px;
+  //padding: 0 15px;
   &:hover {
     ${ProductInner} {
       box-shadow: ${boxShadow};

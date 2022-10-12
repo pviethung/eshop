@@ -1,7 +1,10 @@
-import axios from 'axios';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
-import { User } from '../../../models';
+import { AUTH_ACTIONS } from '../../../context/auth';
+import { useAuthContext } from '../../../hooks';
+import { useLogin } from '../../../hooks/useLogin';
 import ButtonWithState from '../../ButtonWithState';
 import Divider from '../../Divider';
 import EmailField from '../EmailField';
@@ -14,37 +17,39 @@ interface FormValues {
   email: string;
   password: string;
 }
-interface LoginFormProps {
-  onLoginSuccess: (user: User) => void;
-  onLoginError: (error: any) => void;
-}
 
 const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 
-const LoginForm = ({ onLoginSuccess, onLoginError }: LoginFormProps) => {
+const LoginForm = () => {
+  const router = useRouter();
+  const { dispatch } = useAuthContext();
   const { mainColor } = useTheme();
+  const [formBody, setFormBody] = useState<FormValues | null>(null);
   const initialValues: FormValues = {
     email: '',
     password: '',
   };
-  const handleSubmit = async (
-    values: FormValues,
-    formik: FormikHelpers<FormValues>
-  ) => {
-    try {
-      const rs = await axios({
-        method: 'POST',
-        url: `/api/auth/login`,
-        data: {
-          email: values.email,
-          password: values.password,
-        },
-      });
-      onLoginSuccess(rs.data);
-    } catch (err) {
-      onLoginError(err);
-    }
+  const { data: loggedUser, error, isValidating } = useLogin(formBody);
+  const handleSubmit = async (values: FormValues) => {
+    setFormBody({
+      email: values.email,
+      password: values.password,
+    });
   };
+
+  if (error) {
+    console.log(error);
+  }
+
+  useEffect(() => {
+    if (loggedUser) {
+      dispatch({
+        type: AUTH_ACTIONS.LOGIN,
+        payload: loggedUser,
+      });
+      router.push('/');
+    }
+  }, [loggedUser, router, dispatch]);
 
   return (
     <FormWrap>
@@ -74,7 +79,7 @@ const LoginForm = ({ onLoginSuccess, onLoginError }: LoginFormProps) => {
             />
             <ButtonWithState
               innerText="login"
-              loading={props.isSubmitting}
+              loading={isValidating}
               type="submit"
               hoverBorder={mainColor}
               size="md"

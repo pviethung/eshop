@@ -7,12 +7,18 @@ export interface ButtonProps {
   hoverBorder?: string;
   children: React.ReactNode;
   disabled?: boolean;
+  as?: string | React.ComponentType<any>;
 }
 
 const Button = ({
   children,
+  as,
   ...rest
 }: ButtonProps & React.ButtonHTMLAttributes<any>) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+  return (
+    <StyledButton as={as} {...rest}>
+      {children}
+    </StyledButton>
+  );
 };
 export default Button;

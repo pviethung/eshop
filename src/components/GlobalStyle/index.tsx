@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     z-index: 1;
   }
   
+  
 `;
 
 export const AppContainer = styled.div`

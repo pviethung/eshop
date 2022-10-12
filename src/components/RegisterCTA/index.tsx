@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { useTheme } from 'styled-components';
-import Button from '../Button';
+import { StyledButton } from '../Button/style';
 import Divider from '../Divider';
 import FormTitle from '../forms/FormTitle';
 import FormWrap from '../forms/FormWrap';
 
 const RegisterCTA = () => {
   const { mainColor } = useTheme();
+
   return (
     <FormWrap>
       <FormTitle>returning customer</FormTitle>
@@ -16,10 +17,10 @@ const RegisterCTA = () => {
         track your orders in your account and more.
       </p>
       <Divider x={30} />
-      <Link href="/register">
-        <Button size="md" hoverBorder={mainColor} fill="true">
+      <Link href={'/register'} passHref={true}>
+        <StyledButton as={'a'} size="md" hoverBorder={mainColor} fill="true">
           create an account
-        </Button>
+        </StyledButton>
       </Link>
     </FormWrap>
   );

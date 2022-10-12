@@ -3,6 +3,7 @@ import { transition } from '../GlobalStyle';
 import { ButtonProps } from './index';
 
 export const StyledButton = styled.button<ButtonProps>`
+  text-decoration: none;
   cursor: pointer;
   font-weight: 500;
   text-transform: uppercase;

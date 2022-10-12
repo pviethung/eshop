@@ -1,3 +1,7 @@
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 export const moneyFormat = (x: number) => {
-  return x.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  return formatter.format(x);
 };

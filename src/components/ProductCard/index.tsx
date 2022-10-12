@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import Button from '../Button';
+import { Product } from '../../models';
+import { moneyFormat } from '../../utils';
 import {
   Container,
   ProductActions,
@@ -11,11 +12,7 @@ import {
   ProductTitle,
 } from './style';
 
-export interface ProductProps {
-  imgSrc: string;
-  price: string;
-  title: string;
-}
+export interface ProductProps extends Product {}
 
 const ProductCard = ({ product }: { product: ProductProps }) => {
   return (
@@ -23,7 +20,7 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
       <ProductInner>
         <ProductImage>
           <Image
-            src={product.imgSrc}
+            src={product.images[0]}
             alt={product.title}
             width={385}
             height={480}
@@ -31,7 +28,7 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
         </ProductImage>
         <ProductContent>
           <ProductTitle>{product.title}</ProductTitle>
-          <ProductPrice>{product.price} VND</ProductPrice>
+          <ProductPrice>{moneyFormat(product.price)}</ProductPrice>
           <ProductActions>
             <ProductAddBtn size="md">ADD TO CART</ProductAddBtn>
           </ProductActions>

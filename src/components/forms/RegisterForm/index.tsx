@@ -27,8 +27,7 @@ const RegisterForm = () => {
     displayName: string;
   } | null>(null);
 
-  //TODOs handle submit error
-  const { error, data: registeredUser } = useRegister(formBody);
+  const { isValidating, error, data: registeredUser } = useRegister(formBody);
   const router = useRouter();
   const { mainColor } = useTheme();
   const initialValues: FormValues = {
@@ -48,6 +47,11 @@ const RegisterForm = () => {
     });
   };
 
+  if (error) {
+    //TODOs handle submit error
+    console.log(error);
+  }
+
   useEffect(() => {
     if (registeredUser) {
       dispatch({
@@ -55,7 +59,6 @@ const RegisterForm = () => {
         payload: registeredUser,
       });
       router.push('/');
-      console.log('after push');
     }
   }, [registeredUser, router, dispatch]);
 
@@ -89,7 +92,7 @@ const RegisterForm = () => {
                 id="password"
               />
               <ButtonWithState
-                loading={props.isSubmitting}
+                loading={isValidating}
                 innerText="CREATE"
                 type="submit"
                 hoverBorder={mainColor}

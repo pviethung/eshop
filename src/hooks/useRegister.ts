@@ -8,7 +8,7 @@ export const useRegister = (
     displayName: string;
   } | null
 ) => {
-  const swr = useSWRImmutable(formBody ? formBody : null, async (url: any) => {
+  return useSWRImmutable(formBody, async (url: any) => {
     const rs = await axios({
       method: 'POST',
       url: '/api/auth/register',
@@ -16,6 +16,4 @@ export const useRegister = (
     });
     return rs.data;
   });
-
-  return swr;
 };

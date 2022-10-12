@@ -24,7 +24,7 @@ const loginHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   } catch (err) {
     return res.status(500).json({
-      error: true,
+      error: err,
     });
   }
 };
