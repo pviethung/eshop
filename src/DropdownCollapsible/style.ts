@@ -22,8 +22,6 @@ export const StyledCollapsibleTrigger = styled.div`
   }
 `;
 export const Container = styled.div`
-  position: sticky;
-  top: 0;
   .Collapsible {
     cursor: pointer;
     .Collapsible__contentOuter {
@@ -37,7 +35,7 @@ export const Container = styled.div`
       font-weight: 500;
     }
     .Collapsible__contentInner {
-      padding: 15px;
+      padding: 20px;
     }
   }
 `;

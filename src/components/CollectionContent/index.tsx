@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Product } from '../../models';
+import { intersect } from '../../utils';
 import CollectionFilterPrice from '../CollectionFilterPrice';
+import CollectionFilterSize from '../CollectionFilterSize';
 import CollectionLayout from '../CollectionLayout';
 import CollectionListItem from '../CollectionListItem';
 import CollectionShowBy, { NumberOfProductsValues } from '../CollectionShowBy';
@@ -18,32 +20,50 @@ const CollectionContent = ({
   title: string;
 }) => {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  // const [filteredProducts, setFilteredProducts] = useState(products);
+  let filteredProducts: Product[] = [];
+
+  const [sortedProducts, setSortedProducts] = useState(products);
+  const [priceFilteredProducts, setPriceFilteredProducts] = useState(products);
+  const [sizeFilteredProducts, setSizeFilteredProducts] = useState(products);
 
   const handleSelectLayout = (layout: 'grid' | 'list') => {
     setLayout(layout);
-  };
-  const handleSortProducts = (sortedProducts: Product[]) => {
-    setFilteredProducts(sortedProducts);
   };
   const handleNumberOfProducts = (showBy: NumberOfProductsValues) => {
     console.log(showBy);
   };
 
+  const handleSortProducts = (sortedProducts: Product[]) => {
+    setSortedProducts(sortedProducts);
+  };
   const handleFilterPrice = useCallback((filteredProducts: Product[]) => {
-    setFilteredProducts(filteredProducts);
+    setPriceFilteredProducts(filteredProducts);
   }, []);
 
-  // filter
+  const handleFilterSize = (filteredProducts: Product[]) => {
+    setSizeFilteredProducts(filteredProducts);
+  };
+
+  filteredProducts = [
+    sortedProducts,
+    priceFilteredProducts,
+    sizeFilteredProducts,
+  ].reduce((p1, p2) => {
+    return intersect<Product>(p1, p2);
+  });
 
   return (
     <Container>
       <Row>
         <Col w={1 / 4}>
           <CollectionSidebar>
-            {/* <CollectionSidebar products={products} /> */}
             <CollectionFilterPrice
               onFilterPrice={handleFilterPrice}
+              products={products}
+            />
+            <CollectionFilterSize
+              onFilterSize={handleFilterSize}
               products={products}
             />
           </CollectionSidebar>
@@ -56,10 +76,10 @@ const CollectionContent = ({
               layout={layout}
             />
             <CollectionSortBy
-              products={filteredProducts}
+              products={products}
               onSortProducts={handleSortProducts}
             />
-            <p>{products.length} item(s)</p>
+            <p>{filteredProducts.length} item(s)</p>
             <CollectionShowBy
               onSelectNumberOfProducts={handleNumberOfProducts}
             />

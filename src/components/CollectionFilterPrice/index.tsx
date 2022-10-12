@@ -4,6 +4,7 @@ import { getTrackBackground, Range } from 'react-range';
 import { useTheme } from 'styled-components';
 import DropdownCollapsible from '../../DropdownCollapsible';
 import { Product } from '../../models';
+import { moneyFormat } from '../../utils';
 
 interface CollectionFilterPriceProps {
   products: Product[];
@@ -31,10 +32,6 @@ const CollectionFilterPrice = ({
       }, 500),
     [onFilterPrice]
   );
-
-  //   const handleChange = (values: number[]) => {
-
-  //   }
 
   return (
     <DropdownCollapsible trigger="price">
@@ -106,7 +103,7 @@ const CollectionFilterPrice = ({
                 backgroundColor: mainColor,
               }}
             >
-              {values[index].toFixed(1)}
+              {moneyFormat(values[index])}
             </div>
             <div
               style={{

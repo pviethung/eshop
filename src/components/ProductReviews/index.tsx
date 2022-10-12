@@ -5,13 +5,13 @@ import { useTheme } from 'styled-components';
 import * as Yup from 'yup';
 import { Review } from '../../models/Review';
 
-import { getRandomId } from '../../utils/getRandomId';
 import ProductReviewStars from '../ProductReviewStars';
 //@ts-ignore
 import FireStoreParser from 'firestore-parser';
 import { BeatLoader } from 'react-spinners';
 import useSWR from 'swr';
 import { getComments, postComment } from '../../services/firebase';
+import { getRandomId } from '../../utils';
 import ButtonWithState from '../ButtonWithState';
 import {
   CommentForm,
