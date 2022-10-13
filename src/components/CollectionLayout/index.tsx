@@ -1,24 +1,33 @@
+import React, { useState } from 'react';
 import { CgLayoutGridSmall, CgLayoutList } from 'react-icons/cg';
 import { useTheme } from 'styled-components';
 import { Container } from './style';
 
+export type Layout = 'list' | 'grid';
+
 const CollectionLayout = ({
-  layout,
   onSelectLayout,
 }: {
-  layout: string;
-  onSelectLayout: (layout: 'list' | 'grid') => void;
+  onSelectLayout: (layout: Layout) => void;
 }) => {
   const { mainColor, grayColor } = useTheme();
+  const [currentLayout, setCurrentLayout] = useState<Layout>('grid');
+  const handleChangeLayout = (layout: Layout) => {
+    return (e: React.MouseEvent) => {
+      onSelectLayout(layout);
+      setCurrentLayout(layout);
+    };
+  };
+
   return (
     <Container>
       <CgLayoutGridSmall
-        onClick={(e) => onSelectLayout('grid')}
-        color={layout === 'grid' ? mainColor : grayColor}
+        onClick={handleChangeLayout('grid')}
+        color={currentLayout === 'grid' ? mainColor : grayColor}
       />
       <CgLayoutList
-        onClick={(e) => onSelectLayout('list')}
-        color={layout === 'list' ? mainColor : grayColor}
+        onClick={handleChangeLayout('list')}
+        color={currentLayout === 'list' ? mainColor : grayColor}
       />
     </Container>
   );

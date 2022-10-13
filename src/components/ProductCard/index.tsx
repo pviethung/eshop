@@ -1,11 +1,14 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Product } from '../../models';
-import { moneyFormat } from '../../utils';
+import { calculateReviews, moneyFormat } from '../../utils';
+import ProductReviewStars from '../ProductReviewStars';
 import {
   Container,
   ProductActions,
   ProductAddBtn,
   ProductContent,
+  ProductDesc,
   ProductImage,
   ProductInner,
   ProductPrice,
@@ -14,10 +17,23 @@ import {
 
 export interface ProductProps extends Product {}
 
-const ProductCard = ({ product }: { product: ProductProps }) => {
+const ProductCard = ({
+  horizontal,
+  product,
+}: {
+  horizontal?: boolean;
+  product: ProductProps;
+}) => {
+  const router = useRouter();
+
   return (
     <Container>
-      <ProductInner>
+      <ProductInner
+        onClick={(e) => {
+          router.push(`/products/${product.id}`);
+        }}
+        horizontal={horizontal || false}
+      >
         <ProductImage>
           <Image
             src={product.images[0]}
@@ -30,8 +46,19 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
           <ProductTitle>{product.title}</ProductTitle>
           <ProductPrice>{moneyFormat(product.price)}</ProductPrice>
           <ProductActions>
-            <ProductAddBtn size="md">ADD TO CART</ProductAddBtn>
+            <ProductAddBtn onClick={(e) => e.stopPropagation()} size="md">
+              ADD TO CART
+            </ProductAddBtn>
           </ProductActions>
+          {horizontal && (
+            <>
+              <ProductReviewStars
+                interactive={false}
+                rating={calculateReviews(product.reviews)}
+              />
+              <ProductDesc>{product.description}</ProductDesc>
+            </>
+          )}
         </ProductContent>
       </ProductInner>
     </Container>

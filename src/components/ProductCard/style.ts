@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { StyledButton } from './../Button/style';
 import { boxShadow } from './../GlobalStyle/index';
 
@@ -13,22 +13,8 @@ export const ProductActions = styled.div`
   z-index: 1;
 `;
 
-export const ProductInner = styled.div``;
-
-export const Container = styled.div`
-  //padding: 0 15px;
-  &:hover {
-    ${ProductInner} {
-      box-shadow: ${boxShadow};
-    }
-    ${ProductActions} {
-      display: block;
-      box-shadow: ${boxShadow};
-    }
-  }
-`;
-
 export const ProductImage = styled.div``;
+export const ProductDesc = styled.div``;
 
 export const ProductContent = styled.div`
   text-align: center;
@@ -54,5 +40,48 @@ export const ProductAddBtn = styled(StyledButton)`
     border-color: #000;
     background-color: #000;
     color: #fff;
+  }
+`;
+
+export const ProductInner = styled.a<{ horizontal?: boolean }>`
+  display: block;
+  cursor: pointer;
+  ${(props) =>
+    props.horizontal &&
+    css`
+      display: flex;
+      ${ProductContent} {
+        text-align: left;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      ${ProductDesc} {
+        color: #777;
+        font-weight: 300;
+      }
+
+      /* override hover container style */
+      &&& {
+        ${ProductActions} {
+          margin-top: 40px;
+          position: static;
+          order: 1;
+          box-shadow: none;
+        }
+      }
+    `}
+`;
+
+export const Container = styled.div`
+  //padding: 0 15px;
+  &:hover {
+    ${ProductInner} {
+      box-shadow: ${boxShadow};
+    }
+    ${ProductActions} {
+      display: block;
+      box-shadow: ${boxShadow};
+    }
   }
 `;

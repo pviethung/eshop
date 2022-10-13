@@ -1,6 +1,6 @@
-import { transition } from './../../GlobalStyle/index';
-import { StyledButton } from './../../Button/style';
 import styled from 'styled-components';
+import { StyledButton } from './../../Button/style';
+import { transition } from './../../GlobalStyle/index';
 
 export const StyledBanner = styled.div`
   position: relative;
@@ -34,4 +34,5 @@ export const BannerDesc = styled.p`
   font-size: 2.5rem;
   margin-top: 30px;
   height: 5.8rem;
+  color: white;
 `;

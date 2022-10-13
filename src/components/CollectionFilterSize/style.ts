@@ -6,7 +6,8 @@ export const Sizes = styled.div`
   gap: 15px;
 `;
 export const SizeItem = styled.div<{ active: boolean }>`
-  border: 1px solid transparent;
+  user-select: none;
+  border: 2px solid transparent;
   border-radius: 3px;
   border-color: ${(props) =>
     props.active ? props.theme.mainColor : undefined};

@@ -88,8 +88,6 @@ export const getStaticProps: GetStaticProps<
 };
 
 const ProductPage = ({ product }: PageProps) => {
-  console.log('product render');
-
   return (
     <AppContainer>
       <Divider x={60} />

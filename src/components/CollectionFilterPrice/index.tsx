@@ -6,7 +6,7 @@ import DropdownCollapsible from '../../DropdownCollapsible';
 import { moneyFormat } from '../../utils';
 
 interface CollectionFilterPriceProps {
-  onFilterPrice: (min: number, max: number) => void;
+  onFilterPrice: (values: { min: number; max: number } | null) => void;
 }
 
 const STEP = 1;
@@ -21,12 +21,7 @@ const CollectionFilterPrice = ({
   const onFilterPriceMemo = useMemo(
     () =>
       debounce((min: number, max: number) => {
-        onFilterPrice(min, max);
-        // // filter here
-        // const filteredProducts = products.filter((product) => {
-        //   return product.price >= min && product.price <= max;
-        // });
-        // onFilterPrice(filteredProducts);
+        onFilterPrice({ min, max });
       }, 500),
     [onFilterPrice]
   );

@@ -6,7 +6,7 @@ import { AppContainer } from '../../components/GlobalStyle';
 //@ts-ignore
 import FireStoreParser from 'firestore-parser';
 import { ParsedUrlQuery } from 'querystring';
-import CollectionContent from '../../components/CollectionContent';
+import CollectionFilter from '../../components/CollectionFilter';
 import { Collection } from '../../models';
 import { getCollection } from '../../services/firebase/getCollection';
 import { getProducts } from '../../services/firebase/getProducts';
@@ -64,7 +64,7 @@ const CollectionPage = ({ title, products, id }: PageProps) => {
     <>
       <Divider x={80} />
       <AppContainer>
-        <CollectionContent title={title} products={products} />
+        <CollectionFilter title={title} products={products} />
       </AppContainer>
     </>
   );

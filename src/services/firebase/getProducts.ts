@@ -1,4 +1,4 @@
-import { axiosInstance } from './axiosInstance';
+import { axiosInstance, PAGE_SIZE } from './axiosInstance';
 //@ts-ignore
 import FireStoreParser from 'firestore-parser';
 import { Product } from '../../models';
@@ -6,7 +6,7 @@ import { Product } from '../../models';
 export const getProducts = async (productIds: string[]) => {
   try {
     const rs = await axiosInstance({
-      url: `products?pageSize=50`,
+      url: `products?pageSize=${PAGE_SIZE}`,
       method: 'GET',
     });
 

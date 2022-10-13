@@ -1,10 +1,13 @@
 import { useId } from 'react';
-import { Product } from '../../models';
 import DropdownSelect from '../DropdownSelect';
 import { Container } from './style';
 import { SortOption, SortOrder, SortProperty } from './types';
 
 const SORT_BY: SortOption[] = [
+  {
+    value: 'default',
+    label: 'Default',
+  },
   {
     value: 'title_asc',
     label: 'Name Ascending',
@@ -24,25 +27,38 @@ const SORT_BY: SortOption[] = [
 ];
 const CollectionSortBy = ({
   onSortProducts,
-  products,
 }: {
-  products: Product[];
-  onSortProducts: (property: keyof Product, order: 'asc' | 'desc') => void;
+  onSortProducts: (
+    sortBy: {
+      property: SortProperty;
+      order: SortOrder;
+    } | null
+  ) => void;
 }) => {
   return (
     <Container>
       <p>Sort by:</p>
       <DropdownSelect
         instanceId={useId()}
-        onChange={(option: { value: string; label: string } | null) => {
-          if (!option?.value) return onSortProducts('title', 'asc');
+        onChange={(
+          option: {
+            value: typeof SORT_BY[number]['value'];
+            label: typeof SORT_BY[number]['label'];
+          } | null
+        ) => {
+          if (!option?.value)
+            return onSortProducts({ property: 'title', order: 'asc' });
 
-          const [sortProperty, sortOrder] = option.value.split('_') as [
+          if (option.value === 'default') {
+            return onSortProducts(null);
+          }
+
+          const [property, order] = option.value.split('_') as [
             SortProperty,
             SortOrder
           ];
 
-          return onSortProducts(sortProperty, sortOrder);
+          return onSortProducts({ property, order });
         }}
         options={SORT_BY}
         defaultValue={SORT_BY[0]}

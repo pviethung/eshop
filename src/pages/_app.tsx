@@ -7,8 +7,6 @@ import { AuthContextProvider } from '../context/auth';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  console.log('myapp render');
-
   return (
     <AuthContextProvider>
       <GlobalStyle />

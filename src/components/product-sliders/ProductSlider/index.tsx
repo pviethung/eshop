@@ -1,5 +1,6 @@
 import { useSlider } from '../../../hooks';
-import ProductCard, { ProductProps } from '../../ProductCard';
+import { Product } from '../../../models';
+import ProductCard from '../../ProductCard';
 import SliderTitle from '../../SliderTitle';
 import { Container } from './style';
 
@@ -7,13 +8,13 @@ const ProductSlider = ({
   title,
   products,
 }: {
-  title?: string;
-  products: ProductProps[];
+  title: string;
+  products: Product[];
 }) => {
   const { currentSlide, instanceRef, loaded, ref } = useSlider({
     slides: {
       perView: 4,
-      spacing: 0,
+      spacing: 30,
     },
   });
 
@@ -28,7 +29,7 @@ const ProductSlider = ({
         >
           {products.map((product) => (
             <div
-              key={product.imgSrc}
+              key={product.id}
               className="keen-slider__slide"
               style={{ overflow: 'unset' }}
             >
