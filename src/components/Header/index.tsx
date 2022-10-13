@@ -2,13 +2,15 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BsHandbag, BsPerson, BsSearch } from 'react-icons/bs';
 import { AUTH_ACTIONS } from '../../context/auth';
-import { useAuthContext } from '../../hooks';
+import { CART_ACTIONS } from '../../context/cart/types';
+import { useAuthContext, useCartContext } from '../../hooks';
 import { AppContainer } from '../GlobalStyle';
 import Logo from '../Logo';
 import { ActionItem, Actions, Popover, StyledHeader } from './style';
 
 const Header = () => {
-  const { user, dispatch } = useAuthContext();
+  const { user, dispatch: authDispatch } = useAuthContext();
+  const { dispatch: cartDispatch } = useCartContext();
   const [mouted, setMouted] = useState(false);
 
   useEffect(() => {
@@ -40,8 +42,13 @@ const Header = () => {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      dispatch({
+                      authDispatch({
                         type: AUTH_ACTIONS.LOGOUT,
+                      });
+
+                      cartDispatch({
+                        type: CART_ACTIONS.USER_CHANGE,
+                        payload: null,
                       });
                     }}
                   >

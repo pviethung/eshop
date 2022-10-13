@@ -4,7 +4,7 @@ export interface User {
   // expiresIn: string;
   idToken: string;
   // kind: string;
-  // localId: string;
+  userId: string;
   refreshToken: string;
   // registered: boolean;
 }

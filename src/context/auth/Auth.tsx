@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useReducer } from 'react';
-import { User } from '../../models';
+import { getAuthenticatedUser } from '../../utils';
 import { AuthAction, AuthState, AUTH_ACTIONS } from './types';
 
 const initialState: AuthState = {
@@ -8,17 +8,6 @@ const initialState: AuthState = {
 };
 
 export const AuthContext = createContext<AuthState>(initialState);
-
-export const getAuthenticatedUser = (): User | null => {
-  let user: User | null = null;
-
-  if (typeof localStorage !== 'undefined') {
-    let localUser = localStorage.getItem('authUser');
-    user = localUser ? JSON.parse(localUser) : null;
-  }
-
-  return user;
-};
 
 const reduder = (state: AuthState, action: AuthAction) => {
   switch (action.type) {

@@ -1,3 +1,4 @@
+export * from './Cart';
 export * from './CartLineItem';
 export * from './Collection';
 export * from './Product';

@@ -4,17 +4,20 @@ import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
 import Theme from '../components/Theme';
 import { AuthContextProvider } from '../context/auth';
+import { CartContextProvider } from '../context/cart';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>
-      <GlobalStyle />
-      <Theme>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </Theme>
+      <CartContextProvider>
+        <GlobalStyle />
+        <Theme>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Theme>
+      </CartContextProvider>
     </AuthContextProvider>
   );
 }

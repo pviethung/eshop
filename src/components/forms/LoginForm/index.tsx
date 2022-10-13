@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { AUTH_ACTIONS } from '../../../context/auth';
-import { useAuthContext } from '../../../hooks';
+import { CART_ACTIONS } from '../../../context/cart/types';
+import { useAuthContext, useCartContext } from '../../../hooks';
 import { useLogin } from '../../../hooks/useLogin';
 import ButtonWithState from '../../ButtonWithState';
 import Divider from '../../Divider';
@@ -22,7 +23,9 @@ const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 
 const LoginForm = () => {
   const router = useRouter();
-  const { dispatch } = useAuthContext();
+  const { dispatch: authDispatch } = useAuthContext();
+  const { dispatch: cartDispatch } = useCartContext();
+
   const { mainColor } = useTheme();
   const [formBody, setFormBody] = useState<FormValues | null>(null);
   const initialValues: FormValues = {
@@ -43,13 +46,18 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (loggedUser) {
-      dispatch({
+      authDispatch({
         type: AUTH_ACTIONS.LOGIN,
         payload: loggedUser,
       });
+
+      cartDispatch({
+        type: CART_ACTIONS.USER_CHANGE,
+        payload: loggedUser.userId,
+      });
       router.push('/');
     }
-  }, [loggedUser, router, dispatch]);
+  }, [loggedUser, router, authDispatch, cartDispatch]);
 
   return (
     <FormWrap>

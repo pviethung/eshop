@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { CART_ACTIONS } from '../../context/cart/types';
+import { useCartContext } from '../../hooks';
+
 import { Product } from '../../models';
 import { calculateReviews, moneyFormat } from '../../utils';
 import ProductReviewStars from '../ProductReviewStars';
@@ -25,6 +28,7 @@ const ProductCard = ({
   product: ProductProps;
 }) => {
   const router = useRouter();
+  const { dispatch } = useCartContext();
 
   return (
     <Container>
@@ -46,7 +50,16 @@ const ProductCard = ({
           <ProductTitle>{product.title}</ProductTitle>
           <ProductPrice>{moneyFormat(product.price)}</ProductPrice>
           <ProductActions>
-            <ProductAddBtn onClick={(e) => e.stopPropagation()} size="md">
+            <ProductAddBtn
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch({
+                  type: CART_ACTIONS.ADD_LINE_ITEM,
+                  payload: { ...product, quantity: 1 },
+                });
+              }}
+              size="md"
+            >
               ADD TO CART
             </ProductAddBtn>
           </ProductActions>
