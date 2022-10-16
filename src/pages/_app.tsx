@@ -16,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <div id="app-portal"></div>
         </Theme>
       </CartContextProvider>
     </AuthContextProvider>

@@ -10,6 +10,7 @@ import ProductReviewStars from '../ProductReviewStars';
 import FireStoreParser from 'firestore-parser';
 import { BeatLoader } from 'react-spinners';
 import useSWR from 'swr';
+import { useAuthContext, useToast } from '../../hooks';
 import { getComments, postComment } from '../../services/firebase';
 import { getRandomId } from '../../utils';
 import ButtonWithState from '../ButtonWithState';
@@ -20,41 +21,47 @@ import {
   CommentRating,
   CommentTextArea,
   Container,
+  LoadingSpinner,
+  NoCommentYet,
 } from './style';
 
 const ProductReviews = ({ productId }: { productId: string }) => {
   const { mainColor } = useTheme();
   const [rating, setRating] = useState(0);
+  const { user } = useAuthContext();
+  const { showToast } = useToast('error');
+  let status = '';
 
   const { data, error, isValidating, mutate } = useSWR(
     `/products/${productId}/reviews`,
     (url: any) => {
-      console.log(url);
       return getComments(productId);
     }
   );
 
-  if (error) return <div>failed to load</div>;
+  let unparsedReviews: any[] = [];
+  let reviews: Review[] = [];
 
-  //TODO loading state
-  if (!data)
-    return (
-      <div className="loading-spinner">
-        <BeatLoader color={mainColor} />
-      </div>
-    );
+  if (error) status = 'Failed to load comments';
+  if (data) {
+    unparsedReviews = data.arrayValue?.values
+      ? [...data.arrayValue.values]
+      : [];
 
-  console.log(data);
-
-  const unparsedReviews = data.arrayValue?.values
-    ? [...data.arrayValue.values]
-    : [];
-  const reviews: Review[] =
-    unparsedReviews.length > 0 ? FireStoreParser(data.arrayValue.values) : [];
+    reviews =
+      unparsedReviews.length > 0 ? FireStoreParser(data.arrayValue.values) : [];
+  }
 
   return (
     <Container>
-      {reviews.length > 0 && (
+      {isValidating && (
+        <LoadingSpinner>
+          <div className="loading-spinner">
+            <BeatLoader color={mainColor} />
+          </div>
+        </LoadingSpinner>
+      )}
+      {reviews.length > 0 && !error && (
         <CommentList>
           {reviews.map((review) => (
             <CommentItem key={review.id}>
@@ -78,7 +85,10 @@ const ProductReviews = ({ productId }: { productId: string }) => {
           ))}
         </CommentList>
       )}
-      {reviews.length === 0 && <p>There are no comments yet</p>}
+      {reviews.length === 0 && !error && (
+        <NoCommentYet>There are no comments yet</NoCommentYet>
+      )}
+      {error && <NoCommentYet>{status}</NoCommentYet>}
       <CommentForm>
         <Formik
           validateOnBlur={false}
@@ -90,20 +100,16 @@ const ProductReviews = ({ productId }: { productId: string }) => {
             comment: Yup.string().required('Please add your comment'),
           })}
           onSubmit={async (values, actions) => {
-            if (rating === 0)
-              return actions.setFieldError(
-                'comment',
-                'Please give this product a rating.'
-              );
+            if (!user) return showToast('Please log in first');
             const newReview = {
               mapValue: {
                 fields: {
                   content: values.comment,
                   createdAt: new Date().toISOString(),
-                  displayName: 'Hung', //TODO add user.displayName
+                  displayName: user?.displayName,
                   id: getRandomId(),
                   rate: rating,
-                  uid: 'W6NCAbf0mYOZnTMntlTfMxdPtnu2', // TODO add user.id
+                  uid: user.userId,
                 },
               },
             };

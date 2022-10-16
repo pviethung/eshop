@@ -1,15 +1,18 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { CART_ACTIONS } from '../../context/cart/types';
-import { useCartContext } from '../../hooks';
+import { useAuthContext, useCartContext, useToast } from '../../hooks';
 
+import { useState } from 'react';
+import { useTheme } from 'styled-components';
 import { Product } from '../../models';
-import { calculateReviews, moneyFormat } from '../../utils';
+import { calculateReviews, moneyFormat, sleep } from '../../utils';
+import ButtonWithState from '../ButtonWithState';
 import ProductReviewStars from '../ProductReviewStars';
+import ProductSelectSizes from '../ProductSelectSizes';
 import {
   Container,
   ProductActions,
-  ProductAddBtn,
   ProductContent,
   ProductDesc,
   ProductImage,
@@ -19,7 +22,6 @@ import {
 } from './style';
 
 export interface ProductProps extends Product {}
-
 const ProductCard = ({
   horizontal,
   product,
@@ -29,7 +31,15 @@ const ProductCard = ({
 }) => {
   const router = useRouter();
   const { dispatch } = useCartContext();
+  const { user } = useAuthContext();
+  const { mainColor } = useTheme();
+  const [loading, setLoading] = useState(false);
+  const [currentSize, setCurentSize] = useState(product.sizes[0]);
+  const { showToast } = useToast('success');
 
+  const handleSizeChange = (size: string) => {
+    setCurentSize(size);
+  };
   return (
     <Container>
       <ProductInner
@@ -49,19 +59,37 @@ const ProductCard = ({
         <ProductContent>
           <ProductTitle>{product.title}</ProductTitle>
           <ProductPrice>{moneyFormat(product.price)}</ProductPrice>
+
           <ProductActions>
-            <ProductAddBtn
-              onClick={(e) => {
+            <ProductSelectSizes
+              onChange={handleSizeChange}
+              sizes={product.sizes}
+            />
+            <ButtonWithState
+              fill="true"
+              hoverBorder={mainColor}
+              innerText="ADD TO CART"
+              type="button"
+              loading={loading}
+              onClick={async (e) => {
                 e.stopPropagation();
+                if (!user) return router.push('/login');
+                setLoading(true);
                 dispatch({
                   type: CART_ACTIONS.ADD_LINE_ITEM,
-                  payload: { ...product, quantity: 1 },
+                  payload: {
+                    ...product,
+                    variants: {
+                      [currentSize]: 1,
+                    },
+                  },
                 });
+                await sleep(1500);
+                setLoading(false);
+                showToast('Successfully added to cart');
               }}
               size="md"
-            >
-              ADD TO CART
-            </ProductAddBtn>
+            />
           </ProductActions>
           {horizontal && (
             <>

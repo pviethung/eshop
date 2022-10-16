@@ -6,6 +6,7 @@ import { CART_ACTIONS } from '../../context/cart/types';
 import { useAuthContext, useCartContext } from '../../hooks';
 import { AppContainer } from '../GlobalStyle';
 import Logo from '../Logo';
+import SearchProduct from '../SearchProduct';
 import { ActionItem, Actions, Popover, StyledHeader } from './style';
 
 const Header = () => {
@@ -27,7 +28,9 @@ const Header = () => {
         </Link>
         <Actions>
           <ActionItem>
-            <BsSearch />
+            <SearchProduct>
+              <BsSearch />
+            </SearchProduct>
           </ActionItem>
           <ActionItem width={28}>
             <BsPerson />
@@ -42,13 +45,11 @@ const Header = () => {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
+                      cartDispatch({
+                        type: CART_ACTIONS.USER_LOGOUT,
+                      });
                       authDispatch({
                         type: AUTH_ACTIONS.LOGOUT,
-                      });
-
-                      cartDispatch({
-                        type: CART_ACTIONS.USER_CHANGE,
-                        payload: null,
                       });
                     }}
                   >
@@ -57,14 +58,25 @@ const Header = () => {
                 </>
               )}
               {!user && mouted && (
-                <Link href="/login">
-                  <a>Login</a>
-                </Link>
+                <>
+                  <Link href="/login">
+                    <a>Login</a>
+                  </Link>
+                  <br></br>
+                  <br></br>
+                  <Link href="/register">
+                    <a>Register</a>
+                  </Link>
+                </>
               )}
             </Popover>
           </ActionItem>
           <ActionItem>
-            <BsHandbag />
+            <Link href="/cart">
+              <a>
+                <BsHandbag />
+              </a>
+            </Link>
           </ActionItem>
         </Actions>
       </StyledHeader>

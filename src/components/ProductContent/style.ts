@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ProductSizes } from '../ProductSelectSizes/style';
 import { StyledButton } from './../Button/style';
 import { StyledField } from './../forms/InputField/style';
 import { StyledPageTitle } from './../PageTitle/styles';
@@ -7,6 +8,22 @@ export const Container = styled.div`
   ${StyledPageTitle} {
     text-align: left;
     margin-bottom: 20px;
+  }
+  ${ProductSizes} {
+    margin-bottom: 40px;
+    justify-content: flex-start;
+  }
+`;
+export const NoReviews = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  > div,
+  p {
+    margin: 0;
+  }
+  p {
+    margin-left: 15px;
   }
 `;
 export const ProductAvailability = styled.p`
@@ -33,6 +50,13 @@ export const ProductTags = styled.div`
   flex-wrap: wrap;
   margin-bottom: 40px;
   gap: 15px;
+  > p {
+    width: 100%;
+    margin: 0;
+    font-weight: 500;
+    color: #000;
+    text-transform: uppercase;
+  }
   > div {
     padding: 15px;
     background-color: #e5e7eb;

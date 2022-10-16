@@ -1,10 +1,11 @@
+import { PAGE_SIZE } from './axiosInstance';
 //@ts-ignore
 import { axiosInstance } from './axiosInstance';
 
 export const getCollectionIds = async () => {
   try {
     const rs = await axiosInstance({
-      url: `collections?mask.fieldPaths=id&pageSize=50`,
+      url: `collections?mask.fieldPaths=id&pageSize=${PAGE_SIZE}`,
       method: 'GET',
     });
 

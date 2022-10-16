@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { AUTH_ACTIONS } from '../../../context/auth';
-import { useAuthContext, useRegister } from '../../../hooks';
+import { CART_ACTIONS } from '../../../context/cart/types';
+import { useAuthContext, useCartContext, useRegister } from '../../../hooks';
 import ButtonWithState from '../../ButtonWithState';
 import EmailField from '../EmailField';
 import FormWrap from '../FormWrap';
@@ -20,7 +21,8 @@ interface FormValues {
 
 const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 const RegisterForm = () => {
-  const { dispatch } = useAuthContext();
+  const { dispatch: authDispatch } = useAuthContext();
+  const { dispatch: cartDispatch } = useCartContext();
   const [formBody, setFormBody] = useState<{
     email: string;
     password: string;
@@ -47,20 +49,25 @@ const RegisterForm = () => {
     });
   };
 
-  if (error) {
-    //TODOs handle submit error
-    console.log(error);
-  }
-
   useEffect(() => {
+    if (error) {
+      setFormBody(null);
+      return alert('Something went wrong');
+    }
     if (registeredUser) {
-      dispatch({
+      authDispatch({
         type: AUTH_ACTIONS.LOGIN,
         payload: registeredUser,
       });
+
+      cartDispatch({
+        type: CART_ACTIONS.USER_LOGIN,
+        payload: registeredUser.userId,
+      });
+
       router.push('/');
     }
-  }, [registeredUser, router, dispatch]);
+  }, [error, registeredUser, router, authDispatch, cartDispatch]);
 
   return (
     <Container>

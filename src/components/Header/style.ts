@@ -35,6 +35,7 @@ export const Popover = styled.div`
 `;
 
 export const ActionItem = styled.li<ActionItemProps>`
+  user-select: none;
   font-size: ${(props) => (props.width ? props.width : 24) + 'px'};
   cursor: pointer;
   position: relative;

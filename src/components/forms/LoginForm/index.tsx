@@ -19,8 +19,6 @@ interface FormValues {
   password: string;
 }
 
-const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
-
 const LoginForm = () => {
   const router = useRouter();
   const { dispatch: authDispatch } = useAuthContext();
@@ -40,11 +38,11 @@ const LoginForm = () => {
     });
   };
 
-  if (error) {
-    console.log(error);
-  }
-
   useEffect(() => {
+    if (error) {
+      setFormBody(null);
+      return alert('Something went wrong');
+    }
     if (loggedUser) {
       authDispatch({
         type: AUTH_ACTIONS.LOGIN,
@@ -52,12 +50,12 @@ const LoginForm = () => {
       });
 
       cartDispatch({
-        type: CART_ACTIONS.USER_CHANGE,
+        type: CART_ACTIONS.USER_LOGIN,
         payload: loggedUser.userId,
       });
       router.push('/');
     }
-  }, [loggedUser, router, authDispatch, cartDispatch]);
+  }, [error, loggedUser, router, authDispatch, cartDispatch]);
 
   return (
     <FormWrap>
@@ -71,31 +69,38 @@ const LoginForm = () => {
         validateOnChange={false}
         onSubmit={handleSubmit}
       >
-        {(props) => (
-          <Form noValidate>
-            <EmailField
-              label="Email address"
-              required
-              id="email"
-              name="email"
-            />
-            <PasswordField
-              label="Password"
-              required
-              name="password"
-              id="password"
-            />
-            <ButtonWithState
-              innerText="login"
-              loading={isValidating}
-              type="submit"
-              hoverBorder={mainColor}
-              size="md"
-              fill="true"
-            />
-          </Form>
-        )}
+        {(props) => {
+          return (
+            <Form noValidate>
+              <EmailField
+                label="Email address"
+                required
+                id="email"
+                name="email"
+              />
+              <PasswordField
+                label="Password"
+                required
+                name="password"
+                id="password"
+              />
+              <ButtonWithState
+                innerText="login"
+                loading={isValidating}
+                type="submit"
+                hoverBorder={mainColor}
+                size="md"
+                fill="true"
+              />
+            </Form>
+          );
+        }}
       </Formik>
+      {error && (
+        <p style={{ color: 'red', marginTop: '20px' }}>
+          Invalid email or password
+        </p>
+      )}
     </FormWrap>
   );
 };

@@ -92,8 +92,6 @@ const ProductPage = ({ product }: PageProps) => {
     <AppContainer>
       <Divider x={60} />
 
-      {/* TODOs redirect to 404 */}
-      {!product && <h2>Product not found</h2>}
       {product && (
         <Row>
           <Col w={1 / 2}>

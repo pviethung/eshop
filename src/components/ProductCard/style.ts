@@ -34,13 +34,13 @@ export const ProductPrice = styled.p`
 `;
 
 export const ProductAddBtn = styled(StyledButton)`
-  border-color: #000;
+  /* border-color: #000;
   color: #000;
   &:hover {
     border-color: #000;
     background-color: #000;
     color: #fff;
-  }
+  } */
 `;
 
 export const ProductInner = styled.a<{ horizontal?: boolean }>`

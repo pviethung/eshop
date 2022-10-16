@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  position: relative;
   padding: 20px;
   background-color: #fafafa;
+`;
+export const LoadingSpinner = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 export const CommentList = styled.ul`
   list-style: none;
@@ -34,6 +40,12 @@ export const CommentItem = styled.li`
       margin-bottom: 15px;
     }
   }
+`;
+export const NoCommentYet = styled.p`
+  text-align: center;
+  margin-top: 40px;
+  text-transform: uppercase;
+  font-weight: 500;
 `;
 export const CommentForm = styled.div`
   form {

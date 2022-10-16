@@ -9,7 +9,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     // signup
     const {
-      data: { idToken, refreshToken },
+      data: { idToken, refreshToken, localId },
     } = await axios({
       method: 'POST',
       url: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
@@ -36,6 +36,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
       refreshToken,
       email,
       displayName,
+      userId: localId,
     });
   } catch (err) {
     return res.status(500).json({

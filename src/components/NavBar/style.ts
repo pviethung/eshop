@@ -1,5 +1,5 @@
-import { transition } from './../GlobalStyle';
 import styled from 'styled-components';
+import { transition } from './../GlobalStyle';
 
 export const StyledNavBar = styled.nav`
   margin-top: 25px;

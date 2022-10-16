@@ -36,7 +36,10 @@ const GlobalStyle = createGlobalStyle`
   .enlargedImageContainer {
     z-index: 1;
   }
-  
+  #app-portal {
+    position: relative;
+    z-index: 1;
+  }
   
 `;
 

@@ -1,8 +1,11 @@
+import { ButtonHTMLAttributes } from 'react';
 import { BeatLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
 import Button, { ButtonProps } from '../Button';
 
-interface ComponentProps extends Omit<ButtonProps, 'children'> {
+interface ComponentProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    Omit<ButtonProps, 'children'> {
   loading: boolean;
   innerText: string;
   type: 'button' | 'submit' | 'reset' | undefined;
