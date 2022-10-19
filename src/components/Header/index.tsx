@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { BsHandbag, BsPerson, BsSearch } from 'react-icons/bs';
 import { AUTH_ACTIONS } from '../../context/auth';
@@ -13,6 +14,7 @@ const Header = () => {
   const { user, dispatch: authDispatch } = useAuthContext();
   const { dispatch: cartDispatch } = useCartContext();
   const [mouted, setMouted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMouted(true);
@@ -51,6 +53,7 @@ const Header = () => {
                       authDispatch({
                         type: AUTH_ACTIONS.LOGOUT,
                       });
+                      router.replace('/');
                     }}
                   >
                     Log out
@@ -72,6 +75,7 @@ const Header = () => {
             </Popover>
           </ActionItem>
           <ActionItem>
+            {/* TODOs cart items count */}
             <Link href="/cart">
               <a>
                 <BsHandbag />

@@ -2,9 +2,7 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
-import { AUTH_ACTIONS } from '../../../context/auth';
-import { CART_ACTIONS } from '../../../context/cart/types';
-import { useAuthContext, useCartContext, useRegister } from '../../../hooks';
+import { useRegister, useToast } from '../../../hooks';
 import ButtonWithState from '../../ButtonWithState';
 import EmailField from '../EmailField';
 import FormWrap from '../FormWrap';
@@ -21,8 +19,6 @@ interface FormValues {
 
 const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 const RegisterForm = () => {
-  const { dispatch: authDispatch } = useAuthContext();
-  const { dispatch: cartDispatch } = useCartContext();
   const [formBody, setFormBody] = useState<{
     email: string;
     password: string;
@@ -30,6 +26,7 @@ const RegisterForm = () => {
   } | null>(null);
 
   const { isValidating, error, data: registeredUser } = useRegister(formBody);
+  const { showToast } = useToast('error');
   const router = useRouter();
   const { mainColor } = useTheme();
   const initialValues: FormValues = {
@@ -52,22 +49,15 @@ const RegisterForm = () => {
   useEffect(() => {
     if (error) {
       setFormBody(null);
-      return alert('Something went wrong');
+      showToast('Something went wrong please try again later');
+      return;
     }
     if (registeredUser) {
-      authDispatch({
-        type: AUTH_ACTIONS.LOGIN,
-        payload: registeredUser,
-      });
+      console.log(registeredUser);
 
-      cartDispatch({
-        type: CART_ACTIONS.USER_LOGIN,
-        payload: registeredUser.userId,
-      });
-
-      router.push('/');
+      router.push('/login');
     }
-  }, [error, registeredUser, router, authDispatch, cartDispatch]);
+  }, [showToast, error, registeredUser, router]);
 
   return (
     <Container>

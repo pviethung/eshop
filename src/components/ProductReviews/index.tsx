@@ -101,6 +101,10 @@ const ProductReviews = ({ productId }: { productId: string }) => {
           })}
           onSubmit={async (values, actions) => {
             if (!user) return showToast('Please log in first');
+            if (rating === 0)
+              return actions.setFieldError('comment', 'Please add your rating');
+            if (values.comment.trim() === '')
+              return actions.setFieldError('comment', 'Please add your review');
             const newReview = {
               mapValue: {
                 fields: {
@@ -120,9 +124,7 @@ const ProductReviews = ({ productId }: { productId: string }) => {
                 unparsedReviews,
                 newReview
               );
-              // console.log('[response after submit] ', response.reviews);
               mutate();
-              // mutate(response.reviews);
               actions.resetForm();
             } catch (err) {
               actions.setFieldError('comment', 'Something went wrong');

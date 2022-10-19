@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { ProductSizes } from '../ProductSelectSizes/style';
 import { StyledButton } from './../Button/style';
 import { boxShadow } from './../GlobalStyle/index';
 
@@ -56,11 +57,19 @@ export const ProductInner = styled.a<{ horizontal?: boolean }>`
         display: flex;
         flex-direction: column;
       }
+      ${ProductPrice} {
+        margin-bottom: 0;
+      }
       ${ProductDesc} {
         color: #777;
         font-weight: 300;
       }
-
+      ${ProductSizes} {
+        justify-content: flex-start;
+      }
+      ${ProductActions}${ProductActions}${ProductActions}${ProductActions} {
+        margin-top: 20px;
+      }
       /* override hover container style */
       &&& {
         ${ProductActions} {

@@ -2,8 +2,8 @@ import { debounce } from 'debounce';
 import { useMemo, useState } from 'react';
 import { getTrackBackground, Range } from 'react-range';
 import { useTheme } from 'styled-components';
-import DropdownCollapsible from '../../DropdownCollapsible';
 import { moneyFormat } from '../../utils';
+import DropdownCollapsible from '../DropdownCollapsible';
 
 interface CollectionFilterPriceProps {
   onFilterPrice: (values: { min: number; max: number } | null) => void;

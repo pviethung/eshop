@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { useTheme } from 'styled-components';
+import { CART_ACTIONS } from '../../context/cart/types';
+import { useCartContext } from '../../hooks';
 import { moneyFormat } from '../../utils';
+import Button from '../Button';
 import { StyledButton } from '../Button/style';
 import { Container } from './style';
 const CartSummary = ({
@@ -11,6 +14,8 @@ const CartSummary = ({
   totalPrice: number;
 }) => {
   const { mainColor } = useTheme();
+  const { dispatch } = useCartContext();
+
   return (
     <Container>
       <p>Items</p>
@@ -22,9 +27,22 @@ const CartSummary = ({
           Continue shopping
         </StyledButton>
       </Link>
-      <Link href="/404" passHref>
+      <Button
+        onClick={(e) =>
+          dispatch({
+            type: CART_ACTIONS.CLEAR_CART,
+          })
+        }
+        hoverBorder={mainColor}
+        as={'a'}
+        fill="true"
+        size="md"
+      >
+        Clear shopping cart
+      </Button>
+      <Link href="/checkout" passHref>
         <StyledButton hoverBorder={mainColor} as={'a'} fill="true" size="md">
-          Checkout
+          proceed to checkout
         </StyledButton>
       </Link>
     </Container>

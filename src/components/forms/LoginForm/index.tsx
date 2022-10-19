@@ -53,7 +53,7 @@ const LoginForm = () => {
         type: CART_ACTIONS.USER_LOGIN,
         payload: loggedUser.userId,
       });
-      router.push('/');
+      router.replace('/');
     }
   }, [error, loggedUser, router, authDispatch, cartDispatch]);
 

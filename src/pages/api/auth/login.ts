@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getUser, postUser } from '../../../services/firebase';
 
 const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 
@@ -19,11 +20,27 @@ const loginHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { expiresIn, kind, localId, registered, ...rest } = rs.data;
 
+    let user: any = null;
+
+    try {
+      user = await getUser(localId, rest.idToken);
+      console.log(user);
+    } catch (err) {
+      console.log('getUser err ', err);
+    }
+
+    if (!user) {
+      // update user to db
+      await postUser(localId, rest.idToken);
+    }
+
     return res.status(200).json({
       ...rest,
       userId: localId,
     });
-  } catch (err) {
+  } catch (err: any) {
+    console.log('final err ', err);
+
     return res.status(500).json({
       error: err,
     });

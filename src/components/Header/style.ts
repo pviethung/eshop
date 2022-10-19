@@ -39,7 +39,11 @@ export const ActionItem = styled.li<ActionItemProps>`
   font-size: ${(props) => (props.width ? props.width : 24) + 'px'};
   cursor: pointer;
   position: relative;
+
   &:hover {
+    svg {
+      fill: ${(props) => props.theme.mainColor};
+    }
     ${Popover} {
       visibility: visible;
       opacity: 1;

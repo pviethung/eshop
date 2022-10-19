@@ -6,7 +6,7 @@ import CollectionFilterSize from '../CollectionFilterSize';
 import CollectionFilterType from '../CollectionFilterType';
 import CollectionLayout, { Layout } from '../CollectionLayout';
 import CollectionListItem from '../CollectionListItem';
-import CollectionShowBy, { NumberOfProductsValues } from '../CollectionShowBy';
+import { NumberOfProductsValues } from '../CollectionShowBy';
 import CollectionSortBy from '../CollectionSortBy';
 import CollectionVendorFilter from '../CollectionVendorFilter';
 import Col from '../grid-layout/Col';
@@ -82,9 +82,9 @@ const CollectionFilter = ({
             <CollectionLayout onSelectLayout={handleSelectLayout} />
             <CollectionSortBy onSortProducts={handleFilter('sort')} />
             <p>{filteredProducts.length} item(s)</p>
-            <CollectionShowBy
+            {/* <CollectionShowBy
               onSelectNumberOfProducts={handleNumberOfProducts}
-            />
+            /> */}
           </ActionHeader>
           <CollectionListItem
             horizontal={layout === 'list' || false}

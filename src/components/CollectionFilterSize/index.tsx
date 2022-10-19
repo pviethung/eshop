@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import DropdownCollapsible from '../../DropdownCollapsible';
 import { Product } from '../../models';
+import DropdownCollapsible from '../DropdownCollapsible';
 import { SizeItem, Sizes } from './style';
 
 const getSizes = (products: Product[]): string[] => {

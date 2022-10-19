@@ -19,7 +19,6 @@
     "debounce": "^1.2.1",
     "firestore-parser": "^0.9.0",
     "formik": "^2.2.9",
-    "framer-motion": "^7.5.1",
     "immer": "^9.0.15",
     "keen-slider": "^6.8.2",
     "nanoid": "^4.0.0",

@@ -16,7 +16,6 @@ const parseData = (test: any) => {
   return rs;
 };
 
-// TODO restrict permission
 export const postComment = async (
   id: string,
   prevReviews: any[],

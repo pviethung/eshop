@@ -8,6 +8,7 @@ import RegisterCTA from '../components/RegisterCTA';
 
 const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 
+//TODOs prevent if logged
 const Login = () => {
   return (
     <AppContainer>

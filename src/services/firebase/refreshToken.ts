@@ -12,7 +12,7 @@ export const refreshToken = async (): Promise<{
   try {
     const rs = await axios({
       method: 'POST',
-      url: '/api/auth/refresh-tokenn',
+      url: '/api/auth/refresh-token',
       data: {
         refreshToken: user.refreshToken,
       },

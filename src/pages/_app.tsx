@@ -7,6 +7,7 @@ import { AuthContextProvider } from '../context/auth';
 import { CartContextProvider } from '../context/cart';
 import '../styles/globals.css';
 
+//TODO seo head
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>

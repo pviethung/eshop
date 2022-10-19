@@ -36,6 +36,10 @@ export const StyledField = styled.div<{ error: string | undefined }>`
         props.error ? 'none' : props.theme.mainColor + ' solid 1px'};
     }
   }
+  textarea {
+    padding: 6px 12px;
+    width: 100%;
+  }
 
   ${(props) =>
     props.error &&

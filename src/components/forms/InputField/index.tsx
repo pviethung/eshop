@@ -11,7 +11,7 @@ export interface InputFieldProps {
 
 const InputField = (
   props: InputFieldProps & {
-    validate: (value: any) => Promise<string | undefined>;
+    validate: (value: any) => Promise<string | undefined> | undefined;
   }
 ) => {
   const [_, meta] = useField({

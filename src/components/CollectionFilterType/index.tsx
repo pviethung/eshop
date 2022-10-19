@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import DropdownCollapsible from '../../DropdownCollapsible';
 import { Product } from '../../models';
+import DropdownCollapsible from '../DropdownCollapsible';
 import { TypeItem, Types } from './style';
 
 const getTypes = (products: Product[]) => {

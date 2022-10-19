@@ -15,6 +15,12 @@ const TextField = (props: InputFieldProps) => {
         return error.errors[0];
       });
   };
-  return <InputField type="text" validate={validate} {...props} />;
+  return (
+    <InputField
+      type="text"
+      validate={props.required ? validate : () => undefined}
+      {...props}
+    />
+  );
 };
 export default TextField;
