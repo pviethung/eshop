@@ -3,6 +3,13 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   position: relative;
 `;
+export const Hint = styled.div`
+  font-style: italic;
+  margin-top: 20px;
+  p {
+    margin-bottom: 5px;
+  }
+`;
 export const InputWrap = styled.div<{ error?: boolean }>`
   display: flex;
   height: 40px;

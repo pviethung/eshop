@@ -2,27 +2,30 @@ import { animated } from '@react-spring/web';
 import styled from 'styled-components';
 
 export const Container = styled.div``;
-export const SearchWrap = styled(animated.div)`
+
+export const DesktopSearch = styled(animated.div)`
   position: fixed;
   top: 150px;
   left: 15%;
   width: 70%;
+  > svg {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    cursor: pointer;
+  }
+`;
+export const SearchWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   svg {
     cursor: pointer;
-    &:first-of-type {
-      margin-left: -40px;
-    }
-    &:last-of-type {
-      margin-left: 15px;
-    }
+    margin-left: -40px;
   }
 `;
 export const SearchInput = styled.input`
   background-color: #fff;
-
   border: 1px solid #e5e5e5;
   padding: 15px;
   width: calc(100% - 45px);
@@ -32,9 +35,14 @@ export const SearchInput = styled.input`
 
 export const ResultWrap = styled.ul`
   background-color: #fff;
-
+  max-height: 324px;
+  overflow-y: auto;
   width: calc(100% - 45px);
   list-style: none;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 export const ResultItem = styled.li`
   border: 1px solid #e5e5e5;

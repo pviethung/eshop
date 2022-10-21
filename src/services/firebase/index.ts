@@ -4,6 +4,7 @@ export * from './getCollectionTitles';
 export * from './getComments';
 export * from './getHomeCollections';
 export * from './getOrder';
+export * from './getOrderIds';
 export * from './getOrders';
 export * from './getProduct';
 export * from './getProductIds';

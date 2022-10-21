@@ -4,5 +4,4 @@ export interface Cart {
   items: CartLineItem[];
   totalPrice: number;
   userId: string | null;
-  // TODO note?
 }

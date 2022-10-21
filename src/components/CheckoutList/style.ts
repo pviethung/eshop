@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 30px 40px;
   border: 1px solid #e5e5e5;
+
+  @media (max-width: 992px) {
+    margin-bottom: 20px;
+  }
 `;
 export const ListProduct = styled.ul`
   list-style: none;

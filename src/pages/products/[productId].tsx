@@ -94,10 +94,10 @@ const ProductPage = ({ product }: PageProps) => {
 
       {product && (
         <Row>
-          <Col w={1 / 2}>
+          <Col w={1 / 2} md={1}>
             <ProductSliderThumbs images={product.images} />
           </Col>
-          <Col w={1 / 2}>
+          <Col w={1 / 2} md={1}>
             <ProductContent product={product} />
             <ProductTabs>
               <Tabs

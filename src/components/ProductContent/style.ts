@@ -13,6 +13,10 @@ export const Container = styled.div`
     margin-bottom: 40px;
     justify-content: flex-start;
   }
+
+  @media (max-width: 768px) {
+    margin-top: 40px;
+  }
 `;
 export const NoReviews = styled.div`
   display: flex;

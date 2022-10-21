@@ -28,4 +28,18 @@ export const StyledLogo = styled.div`
       }
     }
   }
+
+  @media (max-width: 992px) {
+    h1 {
+      font-size: 5rem;
+      > svg {
+        display: none;
+      }
+      > div {
+        span:last-child {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
 `;

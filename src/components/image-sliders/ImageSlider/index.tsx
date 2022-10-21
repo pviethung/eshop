@@ -15,6 +15,14 @@ const ImageSlider = ({ images }: { images: ImageProps[] }) => {
       perView: 6,
       spacing: 0,
     },
+    breakpoints: {
+      '(max-width: 1200px)': {
+        slides: { perView: 4 },
+      },
+      '(max-width: 768px)': {
+        slides: { perView: 2 },
+      },
+    },
   });
 
   return (

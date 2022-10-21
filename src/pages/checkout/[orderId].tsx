@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { BeatLoader } from 'react-spinners';
+import { useTheme } from 'styled-components';
 import useSWRImmutable from 'swr/immutable';
 import Divider from '../../components/Divider';
 import { AppContainer } from '../../components/GlobalStyle';
@@ -9,6 +10,8 @@ import { getOrder } from '../../services/firebase';
 
 const CheckOutDetail = () => {
   const { query, push } = useRouter();
+  const { mainColor } = useTheme();
+
   const { data, error } = useSWRImmutable(
     query.orderId ? `/orders/${query.orderId}` : null,
     () => getOrder(query.orderId as string)
@@ -27,7 +30,7 @@ const CheckOutDetail = () => {
   if (!data) {
     content = (
       <div style={{ textAlign: 'center' }}>
-        <BeatLoader color={'red'} />
+        <BeatLoader color={mainColor} />
       </div>
     );
   } else {

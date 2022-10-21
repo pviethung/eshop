@@ -19,7 +19,12 @@ const CollectionListItem = ({
         {products.length > 0 &&
           products.map((product) => {
             return (
-              <Col key={product.id} w={horizontal ? 1 : 1 / 3}>
+              <Col
+                key={product.id}
+                w={horizontal ? 1 : 1 / 3}
+                lg={horizontal ? 1 : 1 / 2}
+                md={1}
+              >
                 <ProductCard
                   horizontal={horizontal || false}
                   product={product}

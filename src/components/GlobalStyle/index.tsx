@@ -40,6 +40,14 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     z-index: 1;
   }
+
+
+  @media(max-width: 1200px) {
+    :root {
+      font-size: 45%;
+    }
+  }
+
   
 `;
 

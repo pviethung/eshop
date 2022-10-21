@@ -1,13 +1,12 @@
 import { axiosInstance, CustomAxiosConfig } from './axiosInstance';
-
-export const getComments = async (productId: string) => {
+export const getOrderIds = async (userId: string) => {
   try {
     const rs = await axiosInstance({
-      url: `products/${productId}?mask.fieldPaths=reviews`,
+      url: `users/${userId}?mask.fieldPaths=orders`,
       sendWithToken: true,
     } as CustomAxiosConfig);
 
-    return rs.data.fields.reviews;
+    return rs.data;
   } catch (err) {
     throw err;
   }

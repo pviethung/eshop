@@ -10,7 +10,6 @@ import Row from '../../components/grid-layout/Row';
 import PageTitle from '../../components/PageTitle';
 import { useCartContext } from '../../hooks';
 import { Order } from '../../models';
-//TODOs only checkout when has item
 
 const Checkout = () => {
   const { cart } = useCartContext();
@@ -63,16 +62,15 @@ const Checkout = () => {
   if (cart.itemCount === 0) {
     return false;
   }
-  // TODOs protect route
   return (
     <AppContainer>
       <Divider x={100} />
       <PageTitle>Checkout</PageTitle>
       <Row>
-        <Col w={2 / 5}>
+        <Col lg={1} w={2 / 5}>
           <CheckoutList items={cart.items} />
         </Col>
-        <Col w={1.5 / 5}>
+        <Col lg={1} w={1.5 / 5}>
           <CheckoutShippingInfo
             cart={cart}
             onShippingChange={(shippingFee) => setShippingFee(shippingFee)}
@@ -82,7 +80,7 @@ const Checkout = () => {
             submit={submit}
           />
         </Col>
-        <Col w={1.5 / 5}>
+        <Col lg={1} w={1.5 / 5}>
           <CheckoutSummary
             totalPrice={cart.totalPrice}
             shippingFee={shippingFee}

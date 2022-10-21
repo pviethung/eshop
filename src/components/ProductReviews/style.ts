@@ -67,6 +67,7 @@ export const CommentForm = styled.div`
     > div:last-child {
       display: flex;
       align-items: flex-start;
+      flex-wrap: wrap;
     }
   }
 `;
@@ -87,5 +88,9 @@ export const CommentTextArea = styled.div`
   p {
     color: red;
     margin-top: 10px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { AUTH_ACTIONS } from '../../../context/auth';
 import { CART_ACTIONS } from '../../../context/cart/types';
-import { useAuthContext, useCartContext } from '../../../hooks';
+import { useAuthContext, useCartContext, useToast } from '../../../hooks';
 import { useLogin } from '../../../hooks/useLogin';
 import ButtonWithState from '../../ButtonWithState';
 import Divider from '../../Divider';
@@ -23,6 +23,7 @@ const LoginForm = () => {
   const router = useRouter();
   const { dispatch: authDispatch } = useAuthContext();
   const { dispatch: cartDispatch } = useCartContext();
+  const { showToast } = useToast('error');
 
   const { mainColor } = useTheme();
   const [formBody, setFormBody] = useState<FormValues | null>(null);
@@ -41,7 +42,8 @@ const LoginForm = () => {
   useEffect(() => {
     if (error) {
       setFormBody(null);
-      return alert('Something went wrong');
+      showToast('Invalid email or password');
+      return;
     }
     if (loggedUser) {
       authDispatch({
@@ -55,7 +57,7 @@ const LoginForm = () => {
       });
       router.replace('/');
     }
-  }, [error, loggedUser, router, authDispatch, cartDispatch]);
+  }, [showToast, error, loggedUser, router, authDispatch, cartDispatch]);
 
   return (
     <FormWrap>

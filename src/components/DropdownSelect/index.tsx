@@ -9,9 +9,9 @@ const DropdownSelect = <
   props: Props<Option, IsMulti, Group>
 ) => {
   return (
-    <Container>
+    <Container className={`${props.className}`}>
       <Select
-        className="dropdown-select-container"
+        className={`dropdown-select-container ${props.className}`}
         classNamePrefix="dropdown-select"
         {...props}
       />

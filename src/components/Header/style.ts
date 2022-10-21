@@ -5,7 +5,20 @@ interface ActionItemProps {
   width?: number;
 }
 
+export const MobileSearch = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+    input {
+      width: 100%;
+    }
+  }
+`;
 export const StyledHeader = styled.header`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   a {
     text-decoration: none;
     color: initial;
@@ -13,9 +26,21 @@ export const StyledHeader = styled.header`
   display: flex;
   position: relative;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    align-items: center;
+    flex-wrap: wrap;
+
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #fff;
+    padding-bottom: 20px;
+  }
 `;
 
 export const Popover = styled.div`
+  background-color: #fff;
   position: absolute;
   width: max-content;
   padding: 20px 40px;
@@ -31,6 +56,10 @@ export const Popover = styled.div`
   }
   a {
     color: ${(props) => props.theme.mainColor};
+    display: block;
+    + a {
+      margin-top: 10px;
+    }
   }
 `;
 
@@ -49,15 +78,41 @@ export const ActionItem = styled.li<ActionItemProps>`
       opacity: 1;
     }
   }
+
+  a {
+    position: relative;
+    span {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      position: absolute;
+      background: ${(props) => props.theme.mainColor};
+      font-size: 12px;
+      text-align: center;
+      line-height: 30px;
+      top: 10px;
+      left: 15px;
+      color: #fff;
+    }
+  }
 `;
 
 export const Actions = styled.ul`
   position: absolute;
-  right: 0;
+  right: 15px;
   top: 50%;
   display: flex;
   list-style: none;
   ${ActionItem} {
     margin-left: 24px;
+  }
+
+  @media (max-width: 768px) {
+    top: 35px;
+    ${ActionItem} {
+      &:first-child {
+        display: none;
+      }
+    }
   }
 `;

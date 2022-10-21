@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import Button from '../Button';
-import { Container, InputWrap, Success } from './style';
+import { Container, Hint, InputWrap, Success } from './style';
 
 const CODES = {
   'HEREISYOURCODE': {
@@ -50,7 +50,6 @@ const PromotionInputField = ({
     <Container>
       <InputWrap error={error}>
         <input
-          // TODOS code hint
           type="text"
           onChange={(e) => setValue(e.target.value)}
           value={value}
@@ -76,6 +75,9 @@ const PromotionInputField = ({
           {success} <span>✕</span>
         </Success>
       )}
+      <Hint>
+        <p>* HEREISYOURCODE or HEREISANOTHER</p>
+      </Hint>
     </Container>
   );
 };

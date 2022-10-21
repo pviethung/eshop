@@ -48,12 +48,13 @@ const ProductCard = ({
         }}
         horizontal={horizontal || false}
       >
-        <ProductImage>
+        <ProductImage horizontal={horizontal || false}>
           <Image
             src={product.images[0]}
             alt={product.title}
             width={385}
             height={480}
+            layout="responsive"
           />
         </ProductImage>
         <ProductContent>

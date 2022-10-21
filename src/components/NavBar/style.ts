@@ -9,6 +9,10 @@ export const NavList = styled.ul`
   align-items: center;
   justify-content: center;
   list-style: none;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const NavListItem = styled.li`
   font-size: 1.8rem;

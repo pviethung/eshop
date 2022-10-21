@@ -14,7 +14,9 @@ export const ProductActions = styled.div`
   z-index: 1;
 `;
 
-export const ProductImage = styled.div``;
+export const ProductImage = styled.div<{ horizontal?: boolean }>`
+  width: ${(props) => props.horizontal && '50%'};
+`;
 export const ProductDesc = styled.div``;
 
 export const ProductContent = styled.div`

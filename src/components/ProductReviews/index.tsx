@@ -36,6 +36,9 @@ const ProductReviews = ({ productId }: { productId: string }) => {
     `/products/${productId}/reviews`,
     (url: any) => {
       return getComments(productId);
+    },
+    {
+      shouldRetryOnError: false,
     }
   );
 

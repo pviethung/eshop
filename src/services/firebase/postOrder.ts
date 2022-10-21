@@ -1,5 +1,5 @@
 import { axiosInstance } from './axiosInstance';
-import { getOrders } from './getOrders';
+import { getOrderIds } from './getOrderIds';
 
 const parseNumber = (data: number) => {
   return {
@@ -103,7 +103,7 @@ const saveUserOrders = async (
 // TODOs resitrct user table
 export const postOrder = async (userId: string, cart: any, orderId: string) => {
   const data = JSON.parse(JSON.stringify(cart));
-  let prevOrderIds = await getOrders(userId);
+  let prevOrderIds = await getOrderIds(userId);
   prevOrderIds = prevOrderIds?.fields?.orders?.arrayValue?.values || [];
 
   console.log(data);

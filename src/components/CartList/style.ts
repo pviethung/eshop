@@ -31,42 +31,7 @@ export const ItemImage = styled.div`
   max-width: 160px;
   margin-right: 20px;
 `;
-export const ItemContent = styled.div`
-  width: calc(60% - 140px);
-`;
 
-export const Title = styled.h4`
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-
-  font-weight: 500;
-  font-size: 1.8rem;
-  text-transform: capitalize;
-  margin-bottom: 10px;
-  a {
-    text-decoration: none;
-    color: ${(props) => props.theme.mainColor};
-  }
-`;
-
-export const Price = styled.p`
-  flex: 1;
-  text-align: center;
-  font-weight: 500;
-  color: #000;
-  font-size: 18px;
-  ${ItemContent} & {
-    text-align: left;
-  }
-`;
-
-export const Vendor = styled.p`
-  text-transform: uppercase;
-  font-weight: 500;
-  color: #000;
-`;
 export const Quantity = styled.div`
   border: 1px solid #e5e5e5;
   border-radius: 3px;
@@ -94,6 +59,63 @@ export const Quantity = styled.div`
       height: 100%;
     }
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const ItemContent = styled.div`
+  width: calc(60% - 140px);
+
+  ${Quantity} {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    flex: 1;
+    ${Quantity} {
+      display: block;
+    }
+  }
+`;
+
+export const Title = styled.h4`
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+
+  font-weight: 500;
+  font-size: 1.8rem;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.mainColor};
+  }
+`;
+
+export const Price = styled.p`
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  color: #000;
+  font-size: 18px;
+  ${ItemContent} & {
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    flex: unset;
+    width: max-content;
+  }
+`;
+
+export const Vendor = styled.p`
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #000;
 `;
 
 export const InputError = styled.p`
@@ -110,4 +132,8 @@ export const DeleteLine = styled.div`
   position: absolute;
   top: 15px;
   right: 0;
+
+  @media (max-width: 768px) {
+    top: 90px;
+  }
 `;

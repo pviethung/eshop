@@ -26,4 +26,8 @@ export const StyledButton = styled.button<ButtonProps>`
 
   background-color: ${(props) => (props.disabled ? '#e5e5e5' : undefined)};
   border-color: ${(props) => (props.disabled ? 'transparent' : undefined)};
+
+  @media (max-width: 992px) {
+    font-size: 1.5em;
+  }
 `;

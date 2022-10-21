@@ -1,5 +1,5 @@
 import Banner from '../Banner';
-import { Container } from './style';
+import { Container, MobileScrollTrack } from './style';
 
 const BANNERS: Banner[] = [
   {
@@ -37,9 +37,11 @@ const BANNERS: Banner[] = [
 const HomeBanners3 = () => {
   return (
     <Container>
-      {BANNERS.map((banner) => (
-        <Banner key={banner.src} banner={banner} />
-      ))}
+      <MobileScrollTrack>
+        {BANNERS.map((banner) => (
+          <Banner key={banner.src} banner={banner} />
+        ))}
+      </MobileScrollTrack>
     </Container>
   );
 };

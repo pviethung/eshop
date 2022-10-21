@@ -103,6 +103,77 @@ const CartList = ({ cart }: { cart: Cart }) => {
                 </Title>
                 <Size>Size: {size}</Size>
                 <Price>{moneyFormat(product.price)}</Price>
+                <Quantity>
+                  <Formik
+                    onSubmit={(values) => {
+                      const newQuantity = parseInt(values.quantity) - quantity;
+                      dispatch({
+                        type: CART_ACTIONS.ADD_LINE_ITEM,
+                        payload: {
+                          ...product,
+                          variants: {
+                            [size]: newQuantity,
+                          },
+                        },
+                      });
+                    }}
+                    initialValues={{
+                      quantity: quantity.toString(),
+                    }}
+                    validationSchema={quantitySchema(
+                      product.inventory_quantity - product.quantity + quantity
+                    )}
+                  >
+                    {(props) => {
+                      return (
+                        <Form>
+                          <button
+                            disabled={parseInt(props.values.quantity) === 1}
+                            type="button"
+                            onClick={handleQuantityChange(props, 'minus')}
+                          >
+                            -
+                          </button>
+                          <input
+                            {...props.getFieldProps('quantity')}
+                            disabled={disabled}
+                            type="text"
+                            onBlur={(e) => {
+                              props.handleBlur(e);
+                              const value = +e.target.value;
+                              if (
+                                value > product.inventory_quantity ||
+                                value < 1
+                              ) {
+                                props.setValues({
+                                  quantity: quantity.toString(),
+                                });
+                                return;
+                              }
+                              props.submitForm();
+                            }}
+                          ></input>
+
+                          <button
+                            disabled={
+                              parseInt(props.values.quantity) ===
+                              product.inventory_quantity -
+                                product.quantity +
+                                quantity
+                            }
+                            type="button"
+                            onClick={handleQuantityChange(props, 'plus')}
+                          >
+                            +
+                          </button>
+                          {props.errors.quantity && (
+                            <InputError>{props.errors.quantity}</InputError>
+                          )}
+                        </Form>
+                      );
+                    }}
+                  </Formik>
+                </Quantity>
               </ItemContent>
               <Quantity>
                 <Formik

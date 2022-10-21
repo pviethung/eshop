@@ -28,6 +28,14 @@ const PostSlider = ({
       perView: slidesPerView,
       spacing: 30,
     },
+    breakpoints: {
+      '(max-width: 992px)': {
+        slides: { perView: 2, spacing: 30 },
+      },
+      '(max-width: 576px)': {
+        slides: { perView: 1, spacing: 30 },
+      },
+    },
   });
 
   return (

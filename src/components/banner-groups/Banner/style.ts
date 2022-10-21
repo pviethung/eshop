@@ -24,6 +24,15 @@ export const BannerContent = styled.div`
   ${StyledButton} {
     margin-top: 25px;
   }
+
+  @media (max-width: 1200px) {
+    ${StyledButton} {
+      margin-top: 10px;
+    }
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const BannerTitle = styled.h3`
@@ -35,4 +44,8 @@ export const BannerDesc = styled.p`
   margin-top: 30px;
   height: 5.8rem;
   color: white;
+
+  @media (max-width: 1200px) {
+    margin: 10px 0;
+  }
 `;

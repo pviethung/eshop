@@ -6,5 +6,9 @@ export const Container = styled.div`
       color: #000;
     }
   }
+
+  @media (max-width: 992px) {
+    margin-bottom: 20px;
+  }
 `;
 export const ShippingAddress = styled.div``;

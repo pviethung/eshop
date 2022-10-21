@@ -1,6 +1,6 @@
-import { StyledButton } from './../Button/style';
 import { animated } from '@react-spring/web';
 import styled from 'styled-components';
+import { StyledButton } from './../Button/style';
 
 export const StyledCarousel = styled.div`
   position: relative;
@@ -31,17 +31,33 @@ export const CarouselCaptionWrap = styled(animated.div)`
   ${StyledButton} {
     margin-top: 20px;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const CarouselCaptionTitle = styled.h4`
   font-size: 3rem;
   font-weight: 400;
   text-transform: capitalize;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 export const CarouselCaptionContent = styled.h3`
   font-size: 8rem;
   text-transform: uppercase;
   color: ${(props) => props.theme.mainColor};
+
+  @media (max-width: 992px) {
+    font-size: 4rem;
+    width: 200px;
+  }
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 export const CarouselDots = styled.div`
   display: flex;
@@ -49,6 +65,10 @@ export const CarouselDots = styled.div`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const CarouselDot = styled.button`
   margin: 0 2.5px;

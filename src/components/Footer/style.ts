@@ -1,6 +1,6 @@
-import { StyledLogo } from './../Logo/style';
 import styled from 'styled-components';
 import { StyledField } from '../forms/InputField/style';
+import { StyledLogo } from './../Logo/style';
 
 export const Container = styled.div``;
 
@@ -22,6 +22,10 @@ export const NewsLetterTitle = styled.div`
   justify-content: center;
   font-size: 18px;
   font-weight: 500;
+
+  @media (max-width: 992px) {
+    border: 0;
+  }
 `;
 
 export const FooterNewsLetter = styled.div<{ error?: string | undefined }>`
@@ -36,6 +40,29 @@ export const FooterNewsLetter = styled.div<{ error?: string | undefined }>`
       height: 60px;
       input {
         outline: ${(props) => !props.error && 'none'};
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    flex-wrap: wrap;
+    form {
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      ${StyledField} {
+        border-left: 1px solid #e5e5e5;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    form {
+      width: 100%;
+      > div {
+        width: 100%;
+      }
+      ${StyledField} {
+        width: 100%;
       }
     }
   }

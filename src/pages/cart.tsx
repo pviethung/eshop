@@ -31,10 +31,10 @@ const Cart = () => {
       <PageTitle>Your Cart {cart.itemCount === 0 && 'is empty 😥'}</PageTitle>
       {cart.itemCount > 0 && (
         <Row>
-          <Col w={3 / 4}>
+          <Col lg={1} w={3 / 4}>
             <CartList cart={cart} />
           </Col>
-          <Col w={1 / 4}>
+          <Col lg={1} w={1 / 4}>
             <CartSummary
               totalPrice={cart.totalPrice}
               totalQuantity={cart.itemCount}
