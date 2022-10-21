@@ -17,7 +17,6 @@ export const refreshToken = async (): Promise<{
         refreshToken: user.refreshToken,
       },
     });
-    console.log(rs.data);
     return rs.data;
   } catch (err) {
     throw err;

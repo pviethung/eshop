@@ -11,8 +11,6 @@ const ProductReviewStars = ({
   interactive: boolean;
   onRate?: (e: React.MouseEvent & { rating: number }) => void;
 }) => {
-  if (onRate) console.log(rating);
-
   return (
     <Container>
       <Rater

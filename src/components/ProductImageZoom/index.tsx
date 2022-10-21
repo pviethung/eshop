@@ -11,8 +11,6 @@ const ProductImageZoom = ({
   height: number;
   enlargedImagePortalId?: string;
 }) => {
-  console.log(enlargedImagePortalId);
-
   return (
     <div style={{ position: 'relative' }}>
       <ReactImageMagnify

@@ -3,8 +3,6 @@ import { axiosInstance } from './axiosInstance';
 import FireStoreParser from 'firestore-parser';
 
 export const getOrders = async (orderIds: string[]) => {
-  console.log(orderIds);
-
   if (orderIds.length === 0) return [];
   try {
     const rs = await Promise.allSettled(
@@ -14,8 +12,6 @@ export const getOrders = async (orderIds: string[]) => {
         })
       )
     );
-
-    console.log(rs);
 
     const orders = rs.map((order) => {
       if (order.status === 'fulfilled') {

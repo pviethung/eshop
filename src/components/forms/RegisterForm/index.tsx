@@ -53,8 +53,6 @@ const RegisterForm = () => {
       return;
     }
     if (registeredUser) {
-      console.log(registeredUser);
-
       router.push('/login');
     }
   }, [showToast, error, registeredUser, router]);

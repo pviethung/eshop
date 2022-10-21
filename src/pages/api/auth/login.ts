@@ -24,10 +24,7 @@ const loginHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       user = await getUser(localId, rest.idToken);
-      console.log(user);
-    } catch (err) {
-      console.log('getUser err ', err);
-    }
+    } catch (err) {}
 
     if (!user) {
       // update user to db
@@ -39,8 +36,6 @@ const loginHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       userId: localId,
     });
   } catch (err: any) {
-    console.log('final err ', err);
-
     return res.status(500).json({
       error: err,
     });

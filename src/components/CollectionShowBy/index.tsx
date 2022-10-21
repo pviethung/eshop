@@ -35,9 +35,7 @@ const CollectionShowBy = ({
         onChange={(
           option: typeof SHOW_BY[0] | null,
           actionMeta: ActionMeta<typeof SHOW_BY[0]>
-        ) => {
-          console.log(option?.value);
-        }}
+        ) => {}}
         instanceId={useId()}
         defaultValue={SHOW_BY[0]}
         options={SHOW_BY}

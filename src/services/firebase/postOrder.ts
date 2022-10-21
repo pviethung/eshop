@@ -106,8 +106,6 @@ export const postOrder = async (userId: string, cart: any, orderId: string) => {
   let prevOrderIds = await getOrderIds(userId);
   prevOrderIds = prevOrderIds?.fields?.orders?.arrayValue?.values || [];
 
-  console.log(data);
-
   try {
     await postOrderData(orderId, data);
     saveUserOrders(userId, orderId, prevOrderIds);

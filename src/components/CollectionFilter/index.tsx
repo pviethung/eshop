@@ -36,9 +36,7 @@ const CollectionFilter = ({
 
   let filteredProducts = products;
 
-  const handleNumberOfProducts = (showBy: NumberOfProductsValues) => {
-    console.log(showBy);
-  };
+  const handleNumberOfProducts = (showBy: NumberOfProductsValues) => {};
 
   const handleSelectLayout = (layout: Layout) => {
     setLayout(layout);

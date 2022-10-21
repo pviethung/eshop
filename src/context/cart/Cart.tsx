@@ -115,8 +115,6 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
     return { ...state, cart: cart || state.cart };
   });
 
-  console.log('cart form context ', state.cart);
-
   useEffect(() => {
     saveCart(state.cart);
   }, [state.cart]);

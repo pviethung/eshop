@@ -4,7 +4,6 @@ const API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_TOKEN;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { refreshToken } = req.body;
-  console.log(refreshToken);
   if (!refreshToken)
     return res.status(500).json({
       error: true,
