@@ -5,10 +5,11 @@ import {
   StyledCarousel,
 } from './style';
 
-import Button from '../Button';
-import { useTheme } from 'styled-components';
 import { useTransition } from '@react-spring/web';
-import React, { useState } from 'react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useTheme } from 'styled-components';
+import Button from '../Button';
 import CarouselFader from './CarouselFader';
 
 const IMAGES = [
@@ -51,9 +52,11 @@ const Carousel = () => {
           <CarouselCaptionWrap style={style}>
             <CarouselCaptionTitle>{item.title}</CarouselCaptionTitle>
             <CarouselCaptionContent>{item.content}</CarouselCaptionContent>
-            <Button size="lg" hoverBorder={mainColor} fill="true">
-              Shop now
-            </Button>
+            <Link href={'/collections/BitDkqVNTVLmTW5agITu'}>
+              <Button size="lg" hoverBorder={mainColor} fill="true">
+                Shop now
+              </Button>
+            </Link>
           </CarouselCaptionWrap>
         ) : (
           ''

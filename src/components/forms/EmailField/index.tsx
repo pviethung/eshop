@@ -1,12 +1,14 @@
-import InputField, { InputFieldProps } from '../InputField';
 import * as Yup from 'yup';
+import InputField, { InputFieldProps } from '../InputField';
 
 const EmailField = (props: InputFieldProps) => {
   const validate = (value: any) => {
     let errorMessage;
-    const schema = Yup.string()
-      .email('Invalid email address')
-      .required('This field is required.');
+    let schema = Yup.string().email('Invalid email address');
+
+    schema = props.required
+      ? schema.required('This field is required.')
+      : schema;
 
     return schema
       .validate(value)

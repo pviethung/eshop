@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTheme } from 'styled-components';
 import Button from '../../Button';
 import { BannerContent, BannerDesc, BannerTitle, StyledBanner } from './style';
@@ -28,13 +29,17 @@ const Banner = ({ banner }: { banner: Banner }) => {
         {banner.desc !== '' && <BannerDesc>{banner.desc}</BannerDesc>}
         {banner.hasBtn === false ||
           (banner.btnStyle === 'fill' ? (
-            <Button size="md" hoverBorder={mainColor} fill="true">
-              Shop now
-            </Button>
+            <Link href={'/collections/BitDkqVNTVLmTW5agITu'}>
+              <Button size="md" hoverBorder={mainColor} fill="true">
+                Shop now
+              </Button>
+            </Link>
           ) : (
-            <Button size="md" hoverBorder={mainColor}>
-              Shop now
-            </Button>
+            <Link href={'/collections/BitDkqVNTVLmTW5agITu'}>
+              <Button size="md" hoverBorder={mainColor}>
+                Shop now
+              </Button>
+            </Link>
           ))}
       </BannerContent>
     </StyledBanner>

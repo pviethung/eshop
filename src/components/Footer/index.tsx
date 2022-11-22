@@ -29,14 +29,14 @@ const Footer = () => {
             validateOnChange={false}
             onSubmit={(values, formik) => {
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
+                // alert(JSON.stringify(values, null, 2));
                 formik.setSubmitting(false);
               }, 400);
             }}
           >
             {(formik) => (
               <Form noValidate>
-                <EmailField name="email" id="email" />
+                <EmailField required={false} name="email" id="email" />
                 <Button
                   type="submit"
                   hoverBorder={mainColor}
