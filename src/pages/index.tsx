@@ -8,6 +8,7 @@ import HomeBrands from '../components/image-sliders/HomeBrands';
 import HomePost from '../components/post-sliders/HomePosts';
 import HomeFeatured from '../components/product-sliders/HomeFeaturedProducts';
 import HomeNew from '../components/product-sliders/HomeNewProducts';
+import Seo from '../components/SEO';
 import { Collection } from '../models';
 import { getHomeCollections } from '../services/firebase';
 
@@ -33,6 +34,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 const Home = ({ featuredCollection, newCollection }: PageProps) => {
   return (
     <>
+      <Seo />
       <Divider x={40} />
       <Carousel />
       <HomeBanners1 />
