@@ -1,4 +1,4 @@
-# Getting Started
+# eShop
 
 A fashion E-Commerce site built with Next
 
